@@ -9,7 +9,8 @@ $ echo -n "<Code Here>" | md5sum
 
 - [x] 76ec2408e8fe3f1753c25db51efd8eb3
   - Solved by reading the spec and getting the first code
-- [ ] 0e6aa7be1f68d930926d72b3741a145c
+- [x] 0e6aa7be1f68d930926d72b3741a145c
+  - Solved by implementing the first opcodes HALT, OUT, NOOP
 - [ ] 7997a3b2941eab92c1c0345d5747b420
 - [ ] 186f842951c0dcfe8838af1e7222b7d4
 - [ ] 2bf84e54b95ce97aefd9fc920451fc45

@@ -1,7 +1,8 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+import java.nio.file.Files
+import java.nio.file.Paths
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+fun main() {
+    val vm = VirtualMachine(Files.readAllBytes(Paths.get("challenge.bin")))
+
+    vm.run()
 }
