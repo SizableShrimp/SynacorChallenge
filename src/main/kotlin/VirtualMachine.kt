@@ -1,17 +1,13 @@
 import java.util.Deque
 import java.util.LinkedList
-import java.util.Scanner
 import java.util.stream.Collectors
 
 @OptIn(ExperimentalUnsignedTypes::class)
-class VirtualMachine(private val data: UShortArray) {
+abstract class VirtualMachine(private val data: UShortArray) {
     internal var offset: Int = 0
         private set
     private val registers: UShortArray = UShortArray(8)
     internal val stack: Deque<UShort> = LinkedList()
-    private val scanner by lazy {
-        Scanner(System.`in`)
-    }
     private val inQueue: Deque<Char> = LinkedList()
 
     constructor(data: ByteArray) : this(getUShortArray(data))
@@ -52,9 +48,13 @@ class VirtualMachine(private val data: UShortArray) {
         }
     }
 
+    protected abstract fun printChar(char: Char)
+
+    protected abstract fun readLine(): String
+
     internal fun queryCharIn(): UShort {
         if (this.inQueue.isEmpty()) {
-            this.inQueue.addAll(this.scanner.nextLine().toList())
+            this.inQueue.addAll(this.readLine().toList())
             this.inQueue.add('\n')
         }
 
