@@ -13,8 +13,10 @@ $ echo -n "<Code Here>" | md5sum
   - Solved by implementing the first opcodes HALT, OUT, NOOP
 - [x] 7997a3b2941eab92c1c0345d5747b420
   - Solved by implementing all the opcodes except IN
-- [ ] 186f842951c0dcfe8838af1e7222b7d4
-- [ ] 2bf84e54b95ce97aefd9fc920451fc45
+- [x] 186f842951c0dcfe8838af1e7222b7d4
+  - Solved by picking up the tablet and using it while standing on the foothills
+- [x] 2bf84e54b95ce97aefd9fc920451fc45
+  - Solved by walking around the twisty passages aimlessly
 - [ ] e09640936b3ef532b7b8e83ce8f125f4
 - [ ] 4873cf6b76f62ac7d5a53605b2535a0c
 - [ ] d0c54d4ed7f943280ce3e19532dbb1a6
