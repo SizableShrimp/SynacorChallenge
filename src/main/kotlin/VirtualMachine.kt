@@ -108,8 +108,7 @@ abstract class VirtualMachine(private val data: UShortArray) {
         AND(12, 3, { set(0, get(1) and get(2)) }),
         OR(13, 3, { set(0, get(1) or get(2)) }),
         NOT(14, 2, { set(0, get(1).inv().toUInt().shl(17).shr(17).toUShort()) }),
-        RMEM(15, 2, {
-            set(0, get(get(1).toInt(), relative = false)) }),
+        RMEM(15, 2, { set(0, get(get(1).toInt(), relative = false)) }),
         WMEM(16, 2, { set(get(0).toInt(), get(1), relative = false) }),
         CALL(17, 1, { stack.add((offset + 2).toUShort()) }) {
             override fun getOffset(vm: VirtualMachine) = vm.get(0).toInt()

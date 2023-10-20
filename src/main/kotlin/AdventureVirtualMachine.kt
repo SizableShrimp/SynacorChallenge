@@ -38,7 +38,7 @@ class AdventureVirtualMachine : VirtualMachine {
         return action.toString()
     }
 
-    internal fun updateCurrentRoom(): Boolean {
+    internal fun updateCurrentRoom() {
         // The first 9 lines of the program are always the same; skip them
         var idx = if (this.lines[0] == "Welcome to the Synacor OSCON 2012 Challenge!") 9 else 0
 
@@ -60,15 +60,28 @@ class AdventureVirtualMachine : VirtualMachine {
             } else {
                 val b = false
             }
-            return false // We did an action or something
+
+            return // We did an action or something, return early
         }
 
         val roomName = firstLine.run { this.substring(3, this.length - 3) }
-        val description = this.readUntilBlank(idx, this.lines)
-        idx += description.size + 1
+        val description = mutableListOf<String>()
+        var toAdd: List<String>
+        do {
+            toAdd = this.readUntilBlank(idx, this.lines)
+            idx += toAdd.size + 1
+            description.addAll(toAdd)
+
+            val currentLine = this.lines[idx]
+            if (currentLine == "Things of interest here:" || currentLine.endsWith(" exits:") || currentLine.endsWith(" exit:"))
+                break
+        } while (idx < this.lines.size)
+        if (description.isNotEmpty() && description[0] == "You are in a twisty alike of little passages, all maze.") {
+            val b = false
+        }
         var things = this.readUntilBlank(idx, this.lines)
         idx += things.size + 1
-        val exits = if (things[0].startsWith("Things")) {
+        val exits = if (things[0] == "Things of interest here:") {
             this.readUntilBlank(idx, this.lines)
         } else {
             val temp = things
@@ -78,8 +91,8 @@ class AdventureVirtualMachine : VirtualMachine {
         if (things.isNotEmpty())
             things = things.run { subList(1, this.size) }.map { it.substring(2) }
 
-        this.currentRoom = Room(roomName, description, things, exits)
-        return true
+        this.currentRoom = Room(roomName, description.toList(), things.toList(), exits.toList())
+        return
     }
 
     private fun readUntilBlank(index: Int = 0, lines: List<String>): List<String> {

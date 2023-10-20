@@ -1,5 +1,5 @@
 fun AdventureVirtualMachine.toNode(): AdventurePathFinder.Node {
-    return AdventurePathFinder.Node(this.actionHistory.size, this.inv.toList(), this.currentRoom)
+    return AdventurePathFinder.Node(this.actionHistory.size, this.inv.toList(), this.currentRoom!!)
 }
 
 class AdventurePathFinder(private val data: ByteArray) {
@@ -22,9 +22,10 @@ class AdventurePathFinder(private val data: ByteArray) {
         val newVms = mutableListOf<AdventureVirtualMachine>()
 
         this.vms.removeIf {
+            it.updateCurrentRoom()
             val node = it.toNode()
 
-            if (this.visited.merge(node, 1, Integer::sum)!! >= 3)
+            if (this.visited.merge(node, 1, Integer::sum)!! >= 10)
                 return@removeIf true
 
             val actions = listActions(it)
@@ -48,8 +49,6 @@ class AdventurePathFinder(private val data: ByteArray) {
     }
 
     private fun listActions(vm: AdventureVirtualMachine): List<AdventureVirtualMachine.Action> {
-        val didChangeRooms = vm.updateCurrentRoom()
-
         val currentRoom = vm.currentRoom!!
         val actions = mutableListOf<AdventureVirtualMachine.Action>()
 
@@ -66,7 +65,7 @@ class AdventurePathFinder(private val data: ByteArray) {
         // use
         //   You may activate or otherwise apply an item with 'use <item>'.
 
-        if (didChangeRooms && currentRoom.exits.isNotEmpty()) {
+        if (currentRoom.exits.isNotEmpty()) {
             currentRoom.exits.forEach {
                 actions.add(AdventureVirtualMachine.Action(AdventureVirtualMachine.ActionType.GO, it))
             }
@@ -83,7 +82,7 @@ class AdventurePathFinder(private val data: ByteArray) {
         return actions
     }
 
-    data class Node(val steps: Int, val inv: List<String>, val currentRoom: AdventureVirtualMachine.Room?) {
+    data class Node(val steps: Int, val inv: List<String>, val currentRoom: AdventureVirtualMachine.Room) {
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
             if (javaClass != other?.javaClass) return false
