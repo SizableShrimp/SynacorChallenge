@@ -1412,15 +1412,23 @@
 1412: push [1]
 1413: push [2]
 1414: push [3]
+
+# Called into from func A.
+# Sets reg 1 to the memory at offset 2754 / op 1409
 1415: rmem [1] 2754
+# Sets reg 0 to the memory at offset 2755 / op 1410
 1416: rmem [0] 2755
-1417: eq [0] [0] [1]
+1417: eq [0] [0] [1] # Sets reg 0 to 1 if mem of op 1409 == mem of op 1410
+# If they are equal, jump to op 1424
 1418: jt [0] 2792 # 1424
-1419: rmem [0] 2754
-1420: add [0] [0] 4
-1421: rmem [0] [0]
+
+# Only called if mem of op 1409 != mem of op 1410
+1419: rmem [0] 2754 # Read data at mem offset 2754 / op 1409 into reg 0
+1420: add [0] [0] 4 # Add 4 to read value
+1421: rmem [0] [0] # Convert reg 0 from a memory address to the data at that addr
 1422: jf [0] 2792 # 1424
 1423: call [0]
+
 1424: rmem [1] 2754
 1425: rmem [0] 2755
 1426: eq [0] [0] [1]
@@ -1477,12 +1485,20 @@
 1477: mod [3] [3] 32
 1478: add [0] 25988 [2]
 1479: jf [2] 2961 # 1481
-1480: add [0] [0] 1
+
+# Function A
+1480: add [0] [0] 1 # Add 1 to reg 0
+# Write value from reg 3 into memory address stored in reg 0
 1481: wmem [0] [3]
 1482: jmp 2972 # 1485
+
+# Called from op 1471
 1483: set [0] 25988
 1484: wmem [0] 0
-1485: call [1]
+
+1485: call [1] # Call memory address stored in reg 1
+
+# This should always jump to op 1415
 1486: jt [1] 2764 # 1415
 1487: pop [3]
 1488: pop [2]
@@ -2506,12 +2522,18 @@
 2506: push [1]
 2507: push [2]
 2508: jf [7] 5627 # 2572
+
+# Ran if we modified the teleport val
+# Store regs 0, 1, 2 for retrieval later
 2509: push [0]
 2510: push [1]
 2511: push [2]
+
+# Prepare regs 0 and 1 for use by function A
 2512: set [0] 28858
 2513: set [1] 1553
 2514: add [2] 16357 3
+# Call into function A -- it will call func at op 1553 for us
 2515: call 1480 # 676
 2516: pop [2]
 2517: pop [1]
@@ -2737,22 +2759,39 @@
 2737: pop [2]
 2738: pop [1]
 2739: ret
+
+
+
+# Innermost teleporter loop
 2740: jt [0] 6057 # 2743
+
+# Only ran if reg 0 == 0
 2741: add [0] [1] 1
 2742: ret
+
+# Runs if reg 0 != 0
 2743: jt [1] 6070 # 2748
-2744: add [0] [0] 32767
-2745: set [1] [7]
-2746: call 6049 # 2740
+
+# Only runs if reg 1 == 0
+2744: add [0] [0] 32767 # Subtract 1 from reg 0
+2745: set [1] [7] # Set reg 1 to our teleporter val
+2746: call 6049 # 2740 -- Loop back
 2747: ret
+
+# Runs if reg 1 != 0
 2748: push [0]
-2749: add [1] [1] 32767
+2749: add [1] [1] 32767 # Subtract 1 from reg 1
 2750: call 6049 # 2740
-2751: set [1] [0]
-2752: pop [0]
-2753: add [0] [0] 32767
-2754: call 6049 # 2740
-2755: ret
+
+# Called after one recursive exit of innermost loop
+2751: set [1] [0] # Set reg 1 to val of reg 0
+2752: pop [0] # Set reg 1 back to normal
+2753: add [0] [0] 32767 # Subtract 1 from reg 0
+2754: call 6049 # 2740 -- call back into innermost loop
+2755: ret # Return to op 2527
+
+
+
 2756: mod 84 101 115
 116
 32
