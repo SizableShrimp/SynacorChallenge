@@ -1,186 +1,186 @@
 noop
 noop
-out 87
-out 101
-out 108
-out 99
-out 111
-out 109
-out 101
-out 32
-out 116
-out 111
-out 32
-out 116
-out 104
-out 101
-out 32
-out 83
-out 121
-out 110
-out 97
-out 99
-out 111
-out 114
-out 32
-out 79
-out 83
-out 67
-out 79
-out 78
-out 32
-out 50
-out 48
-out 49
-out 50
-out 32
-out 67
-out 104
-out 97
-out 108
-out 108
-out 101
-out 110
-out 103
-out 101
-out 33
-out 10
-out 80
-out 108
-out 101
-out 97
-out 115
-out 101
-out 32
-out 114
-out 101
-out 99
-out 111
-out 114
-out 100
-out 32
-out 121
-out 111
-out 117
-out 114
-out 32
-out 112
-out 114
-out 111
-out 103
-out 114
-out 101
-out 115
-out 115
-out 32
-out 98
-out 121
-out 32
-out 112
-out 117
-out 116
-out 116
-out 105
-out 110
-out 103
-out 32
-out 99
-out 111
-out 100
-out 101
-out 115
-out 32
-out 108
-out 105
-out 107
-out 101
-out 10
-out 116
-out 104
-out 105
-out 115
-out 32
-out 111
-out 110
-out 101
-out 32
-out 105
-out 110
-out 116
-out 111
-out 32
-out 116
-out 104
-out 101
-out 32
-out 99
-out 104
-out 97
-out 108
-out 108
-out 101
-out 110
-out 103
-out 101
-out 32
-out 119
-out 101
-out 98
-out 115
-out 105
-out 116
-out 101
-out 58
-out 32
-out 73
-out 109
-out 111
-out 70
-out 122
-out 116
-out 87
-out 81
-out 67
-out 118
-out 120
-out 106
-out 10
-out 10
-out 69
-out 120
-out 101
-out 99
-out 117
-out 116
-out 105
-out 110
-out 103
-out 32
-out 115
-out 101
-out 108
-out 102
-out 45
-out 116
-out 101
-out 115
-out 116
-out 46
-out 46
-out 46
-out 10
-out 10
+out 87 # 'W'
+out 101 # 'e'
+out 108 # 'l'
+out 99 # 'c'
+out 111 # 'o'
+out 109 # 'm'
+out 101 # 'e'
+out 32 # ' '
+out 116 # 't'
+out 111 # 'o'
+out 32 # ' '
+out 116 # 't'
+out 104 # 'h'
+out 101 # 'e'
+out 32 # ' '
+out 83 # 'S'
+out 121 # 'y'
+out 110 # 'n'
+out 97 # 'a'
+out 99 # 'c'
+out 111 # 'o'
+out 114 # 'r'
+out 32 # ' '
+out 79 # 'O'
+out 83 # 'S'
+out 67 # 'C'
+out 79 # 'O'
+out 78 # 'N'
+out 32 # ' '
+out 50 # '2'
+out 48 # '0'
+out 49 # '1'
+out 50 # '2'
+out 32 # ' '
+out 67 # 'C'
+out 104 # 'h'
+out 97 # 'a'
+out 108 # 'l'
+out 108 # 'l'
+out 101 # 'e'
+out 110 # 'n'
+out 103 # 'g'
+out 101 # 'e'
+out 33 # '!'
+out 10 # '\n'
+out 80 # 'P'
+out 108 # 'l'
+out 101 # 'e'
+out 97 # 'a'
+out 115 # 's'
+out 101 # 'e'
+out 32 # ' '
+out 114 # 'r'
+out 101 # 'e'
+out 99 # 'c'
+out 111 # 'o'
+out 114 # 'r'
+out 100 # 'd'
+out 32 # ' '
+out 121 # 'y'
+out 111 # 'o'
+out 117 # 'u'
+out 114 # 'r'
+out 32 # ' '
+out 112 # 'p'
+out 114 # 'r'
+out 111 # 'o'
+out 103 # 'g'
+out 114 # 'r'
+out 101 # 'e'
+out 115 # 's'
+out 115 # 's'
+out 32 # ' '
+out 98 # 'b'
+out 121 # 'y'
+out 32 # ' '
+out 112 # 'p'
+out 117 # 'u'
+out 116 # 't'
+out 116 # 't'
+out 105 # 'i'
+out 110 # 'n'
+out 103 # 'g'
+out 32 # ' '
+out 99 # 'c'
+out 111 # 'o'
+out 100 # 'd'
+out 101 # 'e'
+out 115 # 's'
+out 32 # ' '
+out 108 # 'l'
+out 105 # 'i'
+out 107 # 'k'
+out 101 # 'e'
+out 10 # '\n'
+out 116 # 't'
+out 104 # 'h'
+out 105 # 'i'
+out 115 # 's'
+out 32 # ' '
+out 111 # 'o'
+out 110 # 'n'
+out 101 # 'e'
+out 32 # ' '
+out 105 # 'i'
+out 110 # 'n'
+out 116 # 't'
+out 111 # 'o'
+out 32 # ' '
+out 116 # 't'
+out 104 # 'h'
+out 101 # 'e'
+out 32 # ' '
+out 99 # 'c'
+out 104 # 'h'
+out 97 # 'a'
+out 108 # 'l'
+out 108 # 'l'
+out 101 # 'e'
+out 110 # 'n'
+out 103 # 'g'
+out 101 # 'e'
+out 32 # ' '
+out 119 # 'w'
+out 101 # 'e'
+out 98 # 'b'
+out 115 # 's'
+out 105 # 'i'
+out 116 # 't'
+out 101 # 'e'
+out 58 # ':'
+out 32 # ' '
+out 73 # 'I'
+out 109 # 'm'
+out 111 # 'o'
+out 70 # 'F'
+out 122 # 'z'
+out 116 # 't'
+out 87 # 'W'
+out 81 # 'Q'
+out 67 # 'C'
+out 118 # 'v'
+out 120 # 'x'
+out 106 # 'j'
+out 10 # '\n'
+out 10 # '\n'
+out 69 # 'E'
+out 120 # 'x'
+out 101 # 'e'
+out 99 # 'c'
+out 117 # 'u'
+out 116 # 't'
+out 105 # 'i'
+out 110 # 'n'
+out 103 # 'g'
+out 32 # ' '
+out 115 # 's'
+out 101 # 'e'
+out 108 # 'l'
+out 102 # 'f'
+out 45 # '-'
+out 116 # 't'
+out 101 # 'e'
+out 115 # 's'
+out 116 # 't'
+out 46 # '.'
+out 46 # '.'
+out 46 # '.'
+out 10 # '\n'
+out 10 # '\n'
 jmp 369 # Line 189
-out 106
-out 109
-out 112
-out 32
-out 102
-out 97
-out 105
-out 108
-out 115
-out 10
+out 106 # 'j'
+out 109 # 'm'
+out 112 # 'p'
+out 32 # ' '
+out 102 # 'f'
+out 97 # 'a'
+out 105 # 'i'
+out 108 # 'l'
+out 115 # 's'
+out 10 # '\n'
 halt
 noop
 noop
@@ -201,69 +201,69 @@ noop
 noop
 noop
 noop
-out 106
-out 109
-out 112
-out 32
-out 108
-out 97
-out 110
-out 100
-out 115
-out 32
-out 45
-out 50
-out 10
+out 106 # 'j'
+out 109 # 'm'
+out 112 # 'p'
+out 32 # ' '
+out 108 # 'l'
+out 97 # 'a'
+out 110 # 'n'
+out 100 # 'd'
+out 115 # 's'
+out 32 # ' '
+out 45 # '-'
+out 50 # '2'
+out 10 # '\n'
 halt
 noop
 noop
-out 106
-out 109
-out 112
-out 32
-out 108
-out 97
-out 110
-out 100
-out 115
-out 32
-out 45
-out 49
-out 10
+out 106 # 'j'
+out 109 # 'm'
+out 112 # 'p'
+out 32 # ' '
+out 108 # 'l'
+out 97 # 'a'
+out 110 # 'n'
+out 100 # 'd'
+out 115 # 's'
+out 32 # ' '
+out 45 # '-'
+out 49 # '1'
+out 10 # '\n'
 halt
 noop
 noop
-out 106
-out 109
-out 112
-out 32
-out 108
-out 97
-out 110
-out 100
-out 115
-out 32
-out 43
-out 49
-out 10
+out 106 # 'j'
+out 109 # 'm'
+out 112 # 'p'
+out 32 # ' '
+out 108 # 'l'
+out 97 # 'a'
+out 110 # 'n'
+out 100 # 'd'
+out 115 # 's'
+out 32 # ' '
+out 43 # '+'
+out 49 # '1'
+out 10 # '\n'
 halt
 noop
 noop
 noop
 noop
-out 106
-out 109
-out 112
-out 32
-out 108
-out 97
-out 110
-out 100
-out 115
-out 32
-out 43
-out 50
-out 10
+out 106 # 'j'
+out 109 # 'm'
+out 112 # 'p'
+out 32 # ' '
+out 108 # 'l'
+out 97 # 'a'
+out 110 # 'n'
+out 100 # 'd'
+out 115 # 's'
+out 32 # ' '
+out 43 # '+'
+out 50 # '2'
+out 10 # '\n'
 halt
 jt 0 1096 # Line 477
 jf 1 1096 # Line 477
@@ -285,28 +285,28 @@ set [0] 0
 jt [0] 1140 # Line 500
 add [0] 1 1
 jt [0] 586 # Line 299
-out 110
-out 111
-out 32
-out 97
-out 100
-out 100
-out 32
-out 111
-out 112
-out 10
+out 110 # 'n'
+out 111 # 'o'
+out 32 # ' '
+out 97 # 'a'
+out 100 # 'd'
+out 100 # 'd'
+out 32 # ' '
+out 111 # 'o'
+out 112 # 'p'
+out 10 # '\n'
 halt
 eq [1] [0] 2
 jt [1] 612 # Line 311
-out 110
-out 111
-out 32
-out 101
-out 113
-out 32
-out 111
-out 112
-out 10
+out 110 # 'n'
+out 111 # 'o'
+out 32 # ' '
+out 101 # 'e'
+out 113 # 'q'
+out 32 # ' '
+out 111 # 'o'
+out 112 # 'p'
+out 10 # '\n'
 halt
 push [0]
 push [1]
@@ -328,20 +328,20 @@ jf [1] 1199 # Line 531
 or [1] 28912 19626
 eq [0] [1] 31994
 jt [0] 706 # Line 346
-out 110
-out 111
-out 32
-out 98
-out 105
-out 116
-out 119
-out 105
-out 115
-out 101
-out 32
-out 111
-out 114
-out 10
+out 110 # 'n'
+out 111 # 'o'
+out 32 # ' '
+out 98 # 'b'
+out 105 # 'i'
+out 116 # 't'
+out 119 # 'w'
+out 105 # 'i'
+out 115 # 's'
+out 101 # 'e'
+out 32 # ' '
+out 111 # 'o'
+out 114 # 'r'
+out 10 # '\n'
 halt
 not [0] 0
 eq [1] [0] 32767
@@ -423,24 +423,24 @@ wmem 959 21
 wmem 960 7
 noop
 jt 19 1000 # Line 445
-out 119
-out 109
-out 101
-out 109
-out 32
-out 111
-out 112
-out 119
-out 114
-out 105
-out 116
-out 101
-out 32
-out 102
-out 97
-out 105
-out 108
-out 10
+out 119 # 'w'
+out 109 # 'm'
+out 101 # 'e'
+out 109 # 'm'
+out 32 # ' '
+out 111 # 'o'
+out 112 # 'p'
+out 119 # 'w'
+out 114 # 'r'
+out 105 # 'i'
+out 116 # 't'
+out 101 # 'e'
+out 32 # ' '
+out 102 # 'f'
+out 97 # 'a'
+out 105 # 'i'
+out 108 # 'l'
+out 10 # '\n'
 halt
 add [1] 10 6102
 add [1] [1] 1
@@ -474,204 +474,204 @@ pop [2]
 pop [1]
 pop [0]
 jmp 2756 # Line 1411
-out 110
-out 111
-out 32
-out 106
-out 116
-out 47
-out 106
-out 102
-out 10
+out 110 # 'n'
+out 111 # 'o'
+out 32 # ' '
+out 106 # 'j'
+out 116 # 't'
+out 47 # '/'
+out 106 # 'j'
+out 102 # 'f'
+out 10 # '\n'
 halt
-out 110
-out 111
-out 110
-out 122
-out 101
-out 114
-out 111
-out 32
-out 114
-out 101
-out 103
-out 10
+out 110 # 'n'
+out 111 # 'o'
+out 110 # 'n'
+out 122 # 'z'
+out 101 # 'e'
+out 114 # 'r'
+out 111 # 'o'
+out 32 # ' '
+out 114 # 'r'
+out 101 # 'e'
+out 103 # 'g'
+out 10 # '\n'
 halt
-out 110
-out 111
-out 32
-out 115
-out 101
-out 116
-out 32
-out 111
-out 112
-out 10
+out 110 # 'n'
+out 111 # 'o'
+out 32 # ' '
+out 115 # 's'
+out 101 # 'e'
+out 116 # 't'
+out 32 # ' '
+out 111 # 'o'
+out 112 # 'p'
+out 10 # '\n'
 halt
-out 110
-out 111
-out 32
-out 103
-out 116
-out 32
-out 111
-out 112
-out 10
+out 110 # 'n'
+out 111 # 'o'
+out 32 # ' '
+out 103 # 'g'
+out 116 # 't'
+out 32 # ' '
+out 111 # 'o'
+out 112 # 'p'
+out 10 # '\n'
 halt
-out 110
-out 111
-out 32
-out 115
-out 116
-out 97
-out 99
-out 107
-out 10
+out 110 # 'n'
+out 111 # 'o'
+out 32 # ' '
+out 115 # 's'
+out 116 # 't'
+out 97 # 'a'
+out 99 # 'c'
+out 107 # 'k'
+out 10 # '\n'
 halt
-out 110
-out 111
-out 32
-out 98
-out 105
-out 116
-out 119
-out 105
-out 115
-out 101
-out 32
-out 97
-out 110
-out 100
-out 10
+out 110 # 'n'
+out 111 # 'o'
+out 32 # ' '
+out 98 # 'b'
+out 105 # 'i'
+out 116 # 't'
+out 119 # 'w'
+out 105 # 'i'
+out 115 # 's'
+out 101 # 'e'
+out 32 # ' '
+out 97 # 'a'
+out 110 # 'n'
+out 100 # 'd'
+out 10 # '\n'
 halt
-out 110
-out 111
-out 32
-out 98
-out 105
-out 116
-out 119
-out 105
-out 115
-out 101
-out 32
-out 110
-out 111
-out 116
-out 10
+out 110 # 'n'
+out 111 # 'o'
+out 32 # ' '
+out 98 # 'b'
+out 105 # 'i'
+out 116 # 't'
+out 119 # 'w'
+out 105 # 'i'
+out 115 # 's'
+out 101 # 'e'
+out 32 # ' '
+out 110 # 'n'
+out 111 # 'o'
+out 116 # 't'
+out 10 # '\n'
 halt
-out 110
-out 111
-out 32
-out 114
-out 109
-out 101
-out 109
-out 32
-out 111
-out 112
-out 10
+out 110 # 'n'
+out 111 # 'o'
+out 32 # ' '
+out 114 # 'r'
+out 109 # 'm'
+out 101 # 'e'
+out 109 # 'm'
+out 32 # ' '
+out 111 # 'o'
+out 112 # 'p'
+out 10 # '\n'
 halt
-out 110
-out 111
-out 32
-out 119
-out 109
-out 101
-out 109
-out 32
-out 111
-out 112
-out 10
+out 110 # 'n'
+out 111 # 'o'
+out 32 # ' '
+out 119 # 'w'
+out 109 # 'm'
+out 101 # 'e'
+out 109 # 'm'
+out 32 # ' '
+out 111 # 'o'
+out 112 # 'p'
+out 10 # '\n'
 halt
 jmp 730 # Line 354
 jmp 753 # Line 362
-out 110
-out 111
-out 32
-out 99
-out 97
-out 108
-out 108
-out 32
-out 111
-out 112
-out 10
+out 110 # 'n'
+out 111 # 'o'
+out 32 # ' '
+out 99 # 'c'
+out 97 # 'a'
+out 108 # 'l'
+out 108 # 'l'
+out 32 # ' '
+out 111 # 'o'
+out 112 # 'p'
+out 10 # '\n'
 halt
-out 110
-out 111
-out 32
-out 109
-out 111
-out 100
-out 117
-out 108
-out 111
-out 32
-out 109
-out 97
-out 116
-out 104
-out 32
-out 100
-out 117
-out 114
-out 105
-out 110
-out 103
-out 32
-out 97
-out 100
-out 100
-out 32
-out 111
-out 114
-out 32
-out 109
-out 117
-out 108
-out 116
-out 10
+out 110 # 'n'
+out 111 # 'o'
+out 32 # ' '
+out 109 # 'm'
+out 111 # 'o'
+out 100 # 'd'
+out 117 # 'u'
+out 108 # 'l'
+out 111 # 'o'
+out 32 # ' '
+out 109 # 'm'
+out 97 # 'a'
+out 116 # 't'
+out 104 # 'h'
+out 32 # ' '
+out 100 # 'd'
+out 117 # 'u'
+out 114 # 'r'
+out 105 # 'i'
+out 110 # 'n'
+out 103 # 'g'
+out 32 # ' '
+out 97 # 'a'
+out 100 # 'd'
+out 100 # 'd'
+out 32 # ' '
+out 111 # 'o'
+out 114 # 'r'
+out 32 # ' '
+out 109 # 'm'
+out 117 # 'u'
+out 108 # 'l'
+out 116 # 't'
+out 10 # '\n'
 halt
-out 110
-out 111
-out 116
-out 32
-out 104
-out 105
-out 116
-out 99
-out 104
-out 104
-out 105
-out 107
-out 105
-out 110
-out 103
-out 10
+out 110 # 'n'
+out 111 # 'o'
+out 116 # 't'
+out 32 # ' '
+out 104 # 'h'
+out 105 # 'i'
+out 116 # 't'
+out 99 # 'c'
+out 104 # 'h'
+out 104 # 'h'
+out 105 # 'i'
+out 107 # 'k'
+out 105 # 'i'
+out 110 # 'n'
+out 103 # 'g'
+out 10 # '\n'
 halt
-out 110
-out 111
-out 32
-out 109
-out 117
-out 108
-out 116
-out 32
-out 111
-out 112
-out 10
+out 110 # 'n'
+out 111 # 'o'
+out 32 # ' '
+out 109 # 'm'
+out 117 # 'u'
+out 108 # 'l'
+out 116 # 't'
+out 32 # ' '
+out 111 # 'o'
+out 112 # 'p'
+out 10 # '\n'
 halt
-out 110
-out 111
-out 32
-out 109
-out 111
-out 100
-out 32
-out 111
-out 112
-out 10
+out 110 # 'n'
+out 111 # 'o'
+out 32 # ' '
+out 109 # 'm'
+out 111 # 'o'
+out 100 # 'd'
+out 32 # ' '
+out 111 # 'o'
+out 112 # 'p'
+out 10 # '\n'
 halt
 push [0]
 push [3]
@@ -911,7 +911,7 @@ add [5] [5] 1
 push [4]
 jmp 2041 # Line 892
 jt [5] 2121 # Line 916
-out 48
+out 48 # '0'
 jmp 2134 # Line 921
 jf [5] 2134 # Line 921
 pop [0]
@@ -1442,8 +1442,8 @@ pop [0]
 set [0] 32
 set [1] 25988
 call 1789 # Line 802
-out 10
-out 10
+out 10 # '\n'
+out 10 # '\n'
 set [0] 25988
 set [1] 32
 call 1593 # Line 724
@@ -1504,7 +1504,7 @@ jf [1] 3028 # Line 1509
 add [1] [0] 1
 rmem [0] [1]
 call 1540 # Line 699
-out 10
+out 10 # '\n'
 jmp 3260 # Line 1604
 push [0]
 push [1]
@@ -1519,16 +1519,16 @@ pop [0]
 jmp 3260 # Line 1604
 rmem [0] 2754
 push [0]
-out 61
-out 61
-out 32
+out 61 # '='
+out 61 # '='
+out 32 # ' '
 add [0] [0] 0
 rmem [0] [0]
 call 1540 # Line 699
-out 32
-out 61
-out 61
-out 10
+out 32 # ' '
+out 61 # '='
+out 61 # '='
+out 10 # '\n'
 pop [0]
 push [0]
 add [0] [0] 1
@@ -1545,7 +1545,7 @@ add [0] [0] 1
 add [0] [0] [1]
 rmem [0] [0]
 call 1540 # Line 699
-out 10
+out 10 # '\n'
 pop [0]
 push [0]
 call 5845 # Line 2661
@@ -1568,32 +1568,32 @@ add [0] [0] 2
 rmem [0] [0]
 rmem [0] [0]
 eq [2] [0] 1
-out 10
-out 84
-out 104
-out 101
-out 114
-out 101
-out 32
+out 10 # '\n'
+out 84 # 'T'
+out 104 # 'h'
+out 101 # 'e'
+out 114 # 'r'
+out 101 # 'e'
+out 32 # ' '
 jt [2] 3211 # Line 1583
-out 97
-out 114
-out 101
+out 97 # 'a'
+out 114 # 'r'
+out 101 # 'e'
 jmp 3215 # Line 1585
-out 105
-out 115
-out 32
+out 105 # 'i'
+out 115 # 's'
+out 32 # ' '
 call 2023 # Line 884
-out 32
-out 101
-out 120
-out 105
-out 116
+out 32 # ' '
+out 101 # 'e'
+out 120 # 'x'
+out 105 # 'i'
+out 116 # 't'
 eq [2] [0] 1
 jt [2] 3238 # Line 1595
-out 115
-out 58
-out 10
+out 115 # 's'
+out 58 # ':'
+out 10 # '\n'
 pop [0]
 push [0]
 add [0] [0] 2
@@ -2052,9 +2052,9 @@ set [0] 26102
 call 1540 # Line 699
 set [0] [1]
 call 1540 # Line 699
-out 46
-out 10
-out 10
+out 46 # '.'
+out 10 # '\n'
+out 10 # '\n'
 pop [2]
 pop [1]
 pop [0]
@@ -2098,8 +2098,8 @@ push [0]
 set [0] 26281
 call 1540 # Line 699
 pop [0]
-out 10
-out 10
+out 10 # '\n'
+out 10 # '\n'
 jmp 4420 # Line 2107
 call 4682 # Line 2207
 set [0] 26313
@@ -2653,10 +2653,10 @@ pop [2]
 pop [1]
 pop [0]
 ret
-out 45
-out 32
+out 45 # '-'
+out 32 # ' '
 call 1540 # Line 699
-out 10
+out 10 # '\n'
 ret
 push [1]
 push [2]

@@ -60,8 +60,18 @@ object VirtualMachineIO {
                 lineBuilder.append('[').append(value - 32768U).append(']')
             } else {
                 lineBuilder.append(value)
-                if (isJump && i == opcode.numArgs - 1) {
-                    lineBuilder.append(" # Line ").append(getLineNumber(data, value.toInt()))
+                if (isJump) {
+                    if (i == opcode.numArgs - 1)
+                        lineBuilder.append(" # Line ").append(getLineNumber(data, value.toInt()))
+                } else if (opcode == VirtualMachine.Opcode.OUT) {
+                    val char = value.toInt().toChar()
+                    lineBuilder.append(" # '")
+                    if (char == '\n') {
+                        lineBuilder.append("\\n")
+                    } else {
+                        lineBuilder.append(char)
+                    }
+                    lineBuilder.append('\'')
                 }
             }
         }
