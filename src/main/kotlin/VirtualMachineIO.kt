@@ -18,7 +18,7 @@ object VirtualMachineIO {
                 continue
             }
 
-            lines.add(writeOpcode(opcode, data, idx))
+            lines.add((lines.size + 1).toString() + ": " + writeOpcode(opcode, data, idx))
             idx += 1 + opcode.numArgs
         }
 
@@ -62,7 +62,7 @@ object VirtualMachineIO {
                 lineBuilder.append(value)
                 if (isJump) {
                     if (i == opcode.numArgs - 1)
-                        lineBuilder.append(" # Line ").append(getLineNumber(data, value.toInt()))
+                        lineBuilder.append(" # ").append(getLineNumber(data, value.toInt()))
                 } else if (opcode == VirtualMachine.Opcode.OUT) {
                     val char = value.toInt().toChar()
                     lineBuilder.append(" # '")
@@ -83,11 +83,11 @@ object VirtualMachineIO {
         val lines = Files.readAllLines(path).map {
             val commentIdx = it.indexOf('#')
             if (commentIdx != -1) {
-                it.substring(0, commentIdx).trim()
+                it.substring(0, commentIdx)
             } else {
                 it
             }
-        }.filter { it.isNotEmpty() }
+        }.filter { it.isNotBlank() }.map { it.trim() }
         var idx = 0
         var breakIdx = 0
 
@@ -98,12 +98,13 @@ object VirtualMachineIO {
                 break
             }
 
-            if (line[0].isDigit()) {
+            val colonIdx = line.indexOf(':')
+            if (colonIdx == -1) {
                 vm.data[idx++] = line.toUShort()
                 continue
             }
 
-            val split = line.split(' ')
+            val split = line.substring(colonIdx + 2).split(' ')
             val opcode = VirtualMachine.Opcode.valueOf(split[0].uppercase())
             vm.data[idx++] = opcode.id.toUShort()
 
