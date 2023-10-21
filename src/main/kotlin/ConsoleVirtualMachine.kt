@@ -9,8 +9,12 @@ class ConsoleVirtualMachine : VirtualMachine {
     private val scanner by lazy {
         Scanner(System.`in`)
     }
-    private val startingLines: MutableList<String> = AdventurePathFinder.startingActions.toMutableList()
+    internal val startingLines: MutableList<String> = mutableListOf()
     override fun printChar(char: Char) = print(char)
 
-    override fun readLine(): String = if (this.startingLines.isEmpty()) this.scanner.nextLine() else this.startingLines.removeFirst()
+    override fun readLine(): String = if (this.startingLines.isEmpty()) {
+        this.scanner.nextLine()
+    } else {
+        this.startingLines.removeFirst()
+    }
 }

@@ -3,10 +3,9 @@ import java.util.LinkedList
 import java.util.stream.Collectors
 
 @OptIn(ExperimentalUnsignedTypes::class)
-abstract class VirtualMachine(private val data: UShortArray) {
+abstract class VirtualMachine(internal val data: UShortArray) {
     internal var offset: Int = 0
-        private set
-    private val registers: UShortArray = UShortArray(8)
+    internal val registers: UShortArray = UShortArray(8)
     internal val stack: Deque<UShort> = LinkedList()
     private val inQueue: Deque<Char> = LinkedList()
     var paused: Boolean = false
@@ -81,7 +80,7 @@ abstract class VirtualMachine(private val data: UShortArray) {
         return this.inQueue.removeFirst().code.toUShort()
     }
 
-    enum class Opcode(private val id: Byte, private val numArgs: Int, private val operation: VirtualMachine.() -> Unit = { }) {
+    enum class Opcode(val id: Byte, val numArgs: Int, private val operation: VirtualMachine.() -> Unit = { }) {
         HALT(0, 0),
         SET(1, 2, { set(0, get(1)) }),
         PUSH(2, 1, { this.stack.add(get(0)) }),
@@ -149,6 +148,19 @@ abstract class VirtualMachine(private val data: UShortArray) {
 
             for (idx in data.indices step 2) {
                 array[idx / 2] = getUShort(data, idx)
+            }
+
+            return array
+        }
+
+        fun getByteArray(data: UShortArray): ByteArray {
+            val array = ByteArray(data.size * 2)
+            var idx = 0
+
+            for (i in data.indices) {
+                val value = data[i]
+                array[idx++] = value.toByte()
+                array[idx++] = value.toInt().shr(8).toByte()
             }
 
             return array
