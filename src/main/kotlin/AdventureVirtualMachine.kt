@@ -1,13 +1,14 @@
 import java.util.Deque
 import java.util.LinkedList
+import java.util.stream.Collectors
 
 @OptIn(ExperimentalUnsignedTypes::class)
 class AdventureVirtualMachine : VirtualMachine {
     private val lineBuilder: StringBuilder = StringBuilder()
     internal val lines: MutableList<String> = mutableListOf()
-    private val mutableInv: MutableList<String> = mutableListOf()
+    private val mutableInv: MutableSet<String> = mutableSetOf()
     private val mutableActionHistory: MutableList<Action> = mutableListOf()
-    val inv: List<String> = this.mutableInv
+    val inv: Set<String> = this.mutableInv
     val actionHistory: List<Action> = this.mutableActionHistory
     internal val actionQueue: Deque<Action> = LinkedList()
     var currentRoom: Room? = null
@@ -38,6 +39,11 @@ class AdventureVirtualMachine : VirtualMachine {
         return action.toString()
     }
 
+    private fun pauseDebugger() {
+        // Place a debug point on the line below
+        val b = false
+    }
+
     internal fun updateCurrentRoom() {
         // The first 9 lines of the program are always the same; skip them
         var idx = if (this.lines[0] == "Welcome to the Synacor OSCON 2012 Challenge!") 9 else 0
@@ -45,26 +51,58 @@ class AdventureVirtualMachine : VirtualMachine {
         while (this.lines[idx].isBlank())
             idx++
 
-        val firstLine = this.lines[idx++]
-        if (!firstLine.startsWith("==")) {
+        val equalsIdx = this.lines.withIndex().firstOrNull { it.index >= idx && it.value.startsWith("==") }?.index ?: -1
+        if (equalsIdx == -1) {
+            val firstLine = this.lines[idx]
             val currentRoom = this.currentRoom!!
             val lastAction = this.mutableActionHistory[this.mutableActionHistory.lastIndex]
-            if (lastAction.type == ActionType.TAKE) {
-                if (firstLine == "Taken.") {
-                    val things = currentRoom.things.toMutableList().apply { remove(lastAction.subject!!) }
-                    this.mutableInv.add(lastAction.subject!!)
-                    this.currentRoom = Room(currentRoom.name, currentRoom.description, things, currentRoom.exits)
-                } else {
-                    val b = false
+            when (lastAction.type) {
+                ActionType.TAKE -> {
+                    if (firstLine == "Taken.") {
+                        val things = currentRoom.things.toMutableList().apply { remove(lastAction.subject!!) }
+                        this.mutableInv.add(lastAction.subject!!)
+                        this.currentRoom = Room(currentRoom.name, currentRoom.description, things, currentRoom.exits)
+                    } else {
+                        pauseDebugger()
+                    }
                 }
-            } else {
-                val b = false
+                ActionType.USE -> {
+                    logInterestingThing(idx, this.lines.size - 3)
+                    this.actionQueue.add(Action(ActionType.INV))
+                    this.lines.clear()
+                    this.run()
+                    var invIdx = 0
+                    while (this.lines[invIdx].isBlank())
+                        invIdx++
+                    invIdx++ // Skip "Your inventory:" line
+                    this.mutableInv.clear()
+                    for (i in invIdx..<this.lines.size) {
+                        val line = this.lines[i]
+                        if (line.startsWith("- "))
+                            this.mutableInv.add(line.substring(2))
+                    }
+                }
+                ActionType.GO -> {
+                    if (firstLine != "That door is locked.") {
+                        pauseDebugger()
+                    }
+                }
+                else -> {
+                    pauseDebugger()
+                }
             }
 
             return // We did an action or something, return early
         }
 
-        val roomName = firstLine.run { this.substring(3, this.length - 3) }
+        if (equalsIdx != idx) {
+            // Something interesting happened when we entered this room
+            logInterestingThing(idx, equalsIdx)
+
+            idx = equalsIdx
+        }
+
+        val roomName = this.lines[idx++].run { this.substring(3, this.length - 3) }
         val description = mutableListOf<String>()
         var toAdd: List<String>
         do {
@@ -76,11 +114,10 @@ class AdventureVirtualMachine : VirtualMachine {
             if (currentLine == "Things of interest here:" || currentLine.endsWith(" exits:") || currentLine.endsWith(" exit:"))
                 break
         } while (idx < this.lines.size)
-        if (description.isNotEmpty() && description[0] == "You are in a twisty alike of little passages, all maze.") {
-            val b = false
-        }
+
         var things = this.readUntilBlank(idx, this.lines)
         idx += things.size + 1
+
         val exits = if (things[0] == "Things of interest here:") {
             this.readUntilBlank(idx, this.lines)
         } else {
@@ -93,6 +130,13 @@ class AdventureVirtualMachine : VirtualMachine {
 
         this.currentRoom = Room(roomName, description.toList(), things.toList(), exits.toList())
         return
+    }
+
+    private fun logInterestingThing(startIdx: Int, endIdx: Int) {
+        // Something interesting happened, log it if we haven't already
+        val interestingList = this.lines.subList(startIdx, endIdx).joinToString("\n")
+        if (interestingThings.add(interestingList))
+            println(interestingList)
     }
 
     private fun readUntilBlank(index: Int = 0, lines: List<String>): List<String> {
@@ -118,6 +162,10 @@ class AdventureVirtualMachine : VirtualMachine {
         return vmCopy
     }
 
+    companion object {
+        private val interestingThings: MutableSet<String> = mutableSetOf()
+    }
+
     data class Room(val name: String, val description: List<String>, val things: List<String>, val exits: List<String>)
 
     data class Action(val type: ActionType, val subject: String? = null) {
@@ -130,6 +178,10 @@ class AdventureVirtualMachine : VirtualMachine {
         INV,
         TAKE,
         DROP,
-        USE
+        USE;
+
+        companion object {
+            val BY_NAME = entries.stream().collect(Collectors.toMap({ it.name.lowercase() }, { it }))
+        }
     }
 }

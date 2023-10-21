@@ -1,20 +1,40 @@
 fun AdventureVirtualMachine.toNode(): AdventurePathFinder.Node {
-    return AdventurePathFinder.Node(this.actionHistory.size, this.inv.toList(), this.currentRoom!!)
+    return AdventurePathFinder.Node(this.actionHistory.size, this.inv.toSet(), this.currentRoom!!)
 }
 
 class AdventurePathFinder(private val data: ByteArray) {
     private val visited = mutableMapOf<Node, Int>()
     private val vms = mutableListOf<AdventureVirtualMachine>()
 
+    private fun getStartingActions(): List<AdventureVirtualMachine.Action> = startingActions.map {
+        AdventureVirtualMachine.Action(
+            AdventureVirtualMachine.ActionType.BY_NAME[it.substringBefore(' ')]
+                ?: AdventureVirtualMachine.ActionType.GO,
+            it.substringAfter(' ')
+        )
+    }
+
     fun run() {
         val startingVm = AdventureVirtualMachine(this.data)
-        startingVm.run() // Run until it asks for input
+        val startingActions = this.getStartingActions().toMutableList()
+        var start = false
+        while (startingActions.isNotEmpty()) {
+            if (!start) {
+                start = true
+            } else {
+                startingVm.actionQueue.add(startingActions.removeFirst())
+            }
+            startingVm.lines.clear()
+            startingVm.run()
+            startingVm.updateCurrentRoom()
+        }
         this.vms.add(startingVm)
 
         while (vms.isNotEmpty()) {
             runTick()
         }
 
+        // Place a debug point on the line below
         val b = false
     }
 
@@ -75,14 +95,79 @@ class AdventurePathFinder(private val data: ByteArray) {
             currentRoom.things.forEach { actions.add(AdventureVirtualMachine.Action(AdventureVirtualMachine.ActionType.TAKE, it)) }
         }
 
-        // TODO Implement LOOK and USE and maybe DROP
+        // TODO Possibly implement LOOK and DROP
+        if (vm.inv.isNotEmpty()) {
+            vm.inv.forEach { actions.add(AdventureVirtualMachine.Action(AdventureVirtualMachine.ActionType.USE, it)) }
+        }
 
         vm.lines.clear()
 
         return actions
     }
 
-    data class Node(val steps: Int, val inv: List<String>, val currentRoom: AdventureVirtualMachine.Room) {
+    companion object {
+        internal val startingActions: List<String> = listOf(
+            "take tablet",
+            "doorway",
+            "north",
+            "north",
+            "bridge",
+            "continue",
+            "down",
+            "east",
+            "take empty lantern",
+            "west",
+            "west",
+            "passage",
+            // Grue time
+            // "darkness", // We need the lantern for this one
+            "ladder",
+            // To get to the can
+            "west",
+            "south",
+            "north",
+            "take can",
+            "use can", // Fill the lantern with oil
+            "use lantern", // Light the lantern
+            "west",
+            // Go back to ladder and go up it
+            "ladder",
+            // Go through darkness with light lantern
+            "darkness",
+            "continue",
+            "west",
+            "west",
+            "west",
+            "west", // Entrance to Ruins
+            "north", // Main Foyer
+            "take red coin",
+            "north", // Ruins Central Hall
+            "west",
+            "take blue coin",
+            "up",
+            "take shiny coin",
+            "down",
+            "east",
+            "east",
+            "take concave coin",
+            "down",
+            "take corroded coin",
+            "up",
+            "west",
+            // Put in coins in Monument in Ruins Central Hall
+            "use blue coin",
+            "use red coin",
+            "use shiny coin",
+            "use concave coin",
+            "use corroded coin",
+            // Go through unlocked Foyer door
+            "north",
+            "take teleporter",
+            "use teleporter"
+        )
+    }
+
+    data class Node(val steps: Int, val inv: Set<String>, val currentRoom: AdventureVirtualMachine.Room) {
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
             if (javaClass != other?.javaClass) return false
