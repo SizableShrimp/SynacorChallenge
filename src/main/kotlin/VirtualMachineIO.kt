@@ -11,26 +11,14 @@ object VirtualMachineIO {
         val data = vm.data
         val size = data.size
         while (idx < size) {
-            val opcodeId = data[idx]
-            val opcode = if (opcodeId > 256U) null else VirtualMachine.Opcode.LOOKUP_TABLE[opcodeId.toByte()]
+            val opcode = getOpcode(data[idx])
             if (opcode == null) {
                 lines.add(data[idx].toString())
                 idx++
                 continue
             }
 
-            val lineBuilder = StringBuilder(opcode.name.lowercase())
-            for (i in 0..<opcode.numArgs) {
-                val value = data[idx + 1 + i]
-                lineBuilder.append(' ')
-                if (value > 32767U) {
-                    lineBuilder.append('[').append(value - 32768U).append(']')
-                } else {
-                    lineBuilder.append(value)
-                }
-            }
-
-            lines.add(lineBuilder.toString())
+            lines.add(writeOpcode(opcode, data, idx))
             idx += 1 + opcode.numArgs
         }
 
@@ -56,6 +44,29 @@ object VirtualMachineIO {
         }
 
         Files.write(path, lines, Charsets.UTF_8)
+    }
+
+    private fun writeOpcode(opcode: VirtualMachine.Opcode, data: UShortArray, offset: Int): String {
+        val lineBuilder = StringBuilder(opcode.name.lowercase())
+        val isJump = opcode == VirtualMachine.Opcode.JMP
+                || opcode == VirtualMachine.Opcode.JT
+                || opcode == VirtualMachine.Opcode.JF
+                || opcode == VirtualMachine.Opcode.CALL
+
+        for (i in 0..<opcode.numArgs) {
+            val value = data[offset + 1 + i]
+            lineBuilder.append(' ')
+            if (value > 32767U) {
+                lineBuilder.append('[').append(value - 32768U).append(']')
+            } else {
+                lineBuilder.append(value)
+                if (isJump && i == opcode.numArgs - 1) {
+                    lineBuilder.append(" # Line ").append(getLineNumber(data, offset + 1))
+                }
+            }
+        }
+
+        return lineBuilder.toString()
     }
 
     fun readVM(vm: VirtualMachine, path: Path) {
@@ -115,14 +126,13 @@ object VirtualMachineIO {
     /**
      * @return The 1-based line number based on the current VM's state and offset
      */
-    fun getLineNumber(vm: VirtualMachine, offset: Int): Int {
+    fun getLineNumber(data: UShortArray, offset: Int): Int {
         var line = 1
         var idx = 0
-        val data = vm.data
 
         while (idx < offset) {
-            val opcodeId = data[idx].toByte()
-            val opcode = VirtualMachine.Opcode.LOOKUP_TABLE[opcodeId]
+            val opcodeId = data[idx]
+            val opcode = getOpcode(opcodeId)
             if (opcode == null) {
                 idx++
                 line++
@@ -136,4 +146,9 @@ object VirtualMachineIO {
 
         return line
     }
+
+    val VirtualMachine.lineNumber
+        get() = getLineNumber(this.data, this.offset)
+
+    private fun getOpcode(opcodeId: UShort) = if (opcodeId > 256U) null else VirtualMachine.Opcode.LOOKUP_TABLE[opcodeId.toByte()]
 }

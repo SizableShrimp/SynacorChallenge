@@ -170,7 +170,7 @@ out 46
 out 46
 out 10
 out 10
-jmp 369
+jmp 369 # Line 174
 out 106
 out 109
 out 112
@@ -191,12 +191,12 @@ noop
 noop
 noop
 noop
-jmp 380
-jmp 390
-jmp 419
-jmp 506
-jmp 446
-jmp 475
+jmp 380 # Line 195
+jmp 390 # Line 196
+jmp 419 # Line 197
+jmp 506 # Line 198
+jmp 446 # Line 199
+jmp 475 # Line 200
 noop
 noop
 noop
@@ -265,26 +265,26 @@ out 43
 out 50
 out 10
 halt
-jt 0 1096
-jf 1 1096
-jt 1 517
-jmp 1096
-jf 0 522
-jmp 1096
-jt [0] 1115
-jt [1] 1115
-jt [2] 1115
-jt [3] 1115
-jt [4] 1115
-jt [5] 1115
-jt [6] 1115
-jt [7] 1115
+jt 0 1096 # Line 269
+jf 1 1096 # Line 270
+jt 1 517 # Line 271
+jmp 1096 # Line 272
+jf 0 522 # Line 273
+jmp 1096 # Line 274
+jt [0] 1115 # Line 275
+jt [1] 1115 # Line 276
+jt [2] 1115 # Line 277
+jt [3] 1115 # Line 278
+jt [4] 1115 # Line 279
+jt [5] 1115 # Line 280
+jt [6] 1115 # Line 281
+jt [7] 1115 # Line 282
 set [0] 1
-jf [0] 1140
+jf [0] 1140 # Line 284
 set [0] 0
-jt [0] 1140
+jt [0] 1140 # Line 286
 add [0] 1 1
-jt [0] 586
+jt [0] 586 # Line 288
 out 110
 out 111
 out 32
@@ -297,7 +297,7 @@ out 112
 out 10
 halt
 eq [1] [0] 2
-jt [1] 612
+jt [1] 612 # Line 301
 out 110
 out 111
 out 32
@@ -313,21 +313,21 @@ push [1]
 pop [0]
 pop [1]
 eq [2] [1] 2
-jf [2] 1180
+jf [2] 1180 # Line 317
 eq [2] [0] 1
-jf [2] 1180
+jf [2] 1180 # Line 319
 gt [2] [1] [0]
-jf [2] 1161
+jf [2] 1161 # Line 321
 gt [2] [0] [1]
-jt [2] 1161
+jt [2] 1161 # Line 323
 gt [2] 42 42
-jt [2] 1161
+jt [2] 1161 # Line 325
 and [0] 28912 19626
 eq [1] [0] 16544
-jf [1] 1199
+jf [1] 1199 # Line 328
 or [1] 28912 19626
 eq [0] [1] 31994
-jt [0] 706
+jt [0] 706 # Line 331
 out 110
 out 111
 out 32
@@ -345,84 +345,84 @@ out 10
 halt
 not [0] 0
 eq [1] [0] 32767
-jf [1] 1230
+jf [1] 1230 # Line 349
 not [0] 21845
 eq [1] [0] 10922
-jf [1] 1230
-call 1307
-jmp 1311
+jf [1] 1230 # Line 352
+call 1307 # Line 353
+jmp 1311 # Line 354
 pop [0]
 eq [1] [0] 730
-jt [1] 1311
+jt [1] 1311 # Line 357
 eq [1] [0] 728
-jf [1] 1311
+jf [1] 1311 # Line 359
 set [0] 1309
 call [0]
-jmp 1311
+jmp 1311 # Line 362
 pop [0]
 eq [1] [0] 753
-jt [1] 1311
+jt [1] 1311 # Line 365
 eq [1] [0] 751
-jf [1] 1311
+jf [1] 1311 # Line 367
 add [0] 32767 32767
 eq [1] [0] 32766
-jf [1] 1334
+jf [1] 1334 # Line 370
 eq [1] 32766 [0]
-jf [1] 1334
+jf [1] 1334 # Line 372
 add [0] 16384 16384
-jt [0] 1334
+jt [0] 1334 # Line 374
 add [0] 16384 16384
-jt [0] 1334
+jt [0] 1334 # Line 376
 mult [0] 6 9
 eq [1] [0] 42
-jt [1] 1403
+jt [1] 1403 # Line 379
 eq [1] [0] 54
-jf [1] 1436
+jf [1] 1436 # Line 381
 mult [0] 12345 32123
 eq [1] [0] 99
-jf [1] 1334
+jf [1] 1334 # Line 384
 mod [0] 6 3
 eq [1] [0] 0
-jf [1] 1459
+jf [1] 1459 # Line 387
 mod [0] 70 6
 eq [1] [0] 4
-jf [1] 1459
+jf [1] 1459 # Line 390
 mult [0] 32766 15
 eq [1] [0] 32738
-jf [1] 1334
-jmp 867
+jf [1] 1334 # Line 393
+jmp 867 # Line 394
 30000
 10000
 rmem [0] 865
 eq [1] [0] 20000
-jf [1] 1261
+jf [1] 1261 # Line 399
 add [2] 865 1
 rmem [0] [2]
 eq [1] [0] 10000
-jf [1] 1261
+jf [1] 1261 # Line 403
 set [0] 865
 wmem [0] 30000
 rmem [2] [0]
 eq [1] [2] 30000
-jf [1] 1284
-call 1745
+jf [1] 1284 # Line 408
+call 1745 # Line 409
 rmem [0] 6090
 eq [1] [0] 11
-jf [1] 1261
+jf [1] 1261 # Line 412
 add [2] 6090 1
 rmem [0] [2]
 eq [1] [0] 116
-jf [1] 1261
+jf [1] 1261 # Line 416
 wmem [2] 84
 rmem [0] [2]
 eq [1] [0] 116
-jt [1] 1284
+jt [1] 1284 # Line 420
 eq [1] [0] 84
-jf [1] 1284
+jf [1] 1284 # Line 422
 wmem 959 21
 wmem 960 7
 noop
-jt 19 1000
+jt 19 1000 # Line 426
 out 119
 out 109
 out 101
@@ -449,12 +449,12 @@ add [2] [2] 6138
 set [0] 6138
 add [0] [0] 1
 gt [3] [0] [2]
-jt [3] 1045
+jt [3] 1045 # Line 453
 rmem [4] [0]
 wmem [1] [4]
 add [0] [0] 1
 add [1] [1] 1
-jmp 1022
+jmp 1022 # Line 458
 rmem [0] 6102
 rmem [1] 6121
 add [0] [0] [1]
@@ -462,18 +462,18 @@ add [0] [0] 1
 wmem 6102 [0]
 wmem 6121 44
 set [0] 6102
-call 1540
+call 1540 # Line 466
 push [0]
 push [1]
 push [2]
 set [0] 26865
 set [1] 1553
 add [2] 16691 11842
-call 1480
+call 1480 # Line 473
 pop [2]
 pop [1]
 pop [0]
-jmp 2756
+jmp 2756 # Line 477
 out 110
 out 111
 out 32
@@ -584,8 +584,8 @@ out 111
 out 112
 out 10
 halt
-jmp 730
-jmp 753
+jmp 730 # Line 588
+jmp 753 # Line 589
 out 110
 out 111
 out 32
@@ -684,12 +684,12 @@ rmem [4] [0]
 set [1] 0
 add [3] 1 [1]
 gt [0] [3] [4]
-jt [0] 1529
+jt [0] 1529 # Line 688
 add [3] [3] [6]
 rmem [0] [3]
 call [5]
 add [1] [1] 1
-jt [1] 1502
+jt [1] 1502 # Line 693
 pop [6]
 pop [5]
 pop [4]
@@ -698,25 +698,25 @@ pop [0]
 ret
 push [1]
 set [1] 1550
-call 1480
+call 1480 # Line 702
 pop [1]
 ret
 out [0]
 ret
 push [1]
 set [1] [2]
-call 2147
+call 2147 # Line 709
 out [0]
 pop [1]
 ret
 push [1]
 push [3]
 rmem [3] [0]
-jf [3] 1585
-call 1480
-jt [1] 1585
+jf [3] 1585 # Line 716
+call 1480 # Line 717
+jt [1] 1585 # Line 718
 set [0] [2]
-jmp 1588
+jmp 1588 # Line 720
 set [0] 32767
 pop [3]
 pop [1]
@@ -725,7 +725,7 @@ push [1]
 push [2]
 set [2] [1]
 set [1] 1627
-call 1565
+call 1565 # Line 729
 pop [2]
 pop [1]
 ret
@@ -733,12 +733,12 @@ push [1]
 push [2]
 set [2] [1]
 set [1] 1670
-call 1565
+call 1565 # Line 737
 pop [2]
 pop [1]
 ret
 eq [0] [0] [2]
-jf [0] 1640
+jf [0] 1640 # Line 742
 set [2] [1]
 set [1] 32767
 ret
@@ -747,16 +747,16 @@ add [3] [2] 1
 add [3] [3] [1]
 rmem [3] [3]
 eq [3] [0] [3]
-jt [3] 1667
+jt [3] 1667 # Line 751
 set [2] [1]
 set [1] 32767
 pop [3]
 ret
 push [1]
 set [1] [2]
-call 1689
+call 1689 # Line 758
 pop [1]
-jf [0] 1688
+jf [0] 1688 # Line 760
 set [2] [1]
 set [1] 32767
 ret
@@ -767,15 +767,15 @@ push [4]
 rmem [3] [0]
 rmem [4] [1]
 eq [2] [3] [4]
-jf [2] 1733
+jf [2] 1733 # Line 771
 or [2] [3] [4]
-jf [2] 1728
+jf [2] 1728 # Line 773
 set [2] [1]
 set [1] 1641
-call 1480
-jf [1] 1733
+call 1480 # Line 776
+jf [1] 1733 # Line 777
 set [0] 1
-jmp 1736
+jmp 1736 # Line 779
 set [0] 0
 pop [4]
 pop [3]
@@ -788,14 +788,14 @@ set [1] 6090
 rmem [0] [1]
 push [1]
 mult [1] [1] [1]
-call 2147
+call 2147 # Line 792
 set [1] 16724
-call 2147
+call 2147 # Line 794
 pop [1]
 wmem [1] [0]
 add [1] [1] 1
 eq [0] 29957 [1]
-jf [0] 1752
+jf [0] 1752 # Line 799
 pop [1]
 pop [0]
 ret
@@ -809,18 +809,18 @@ set [0] [1]
 set [5] 0
 add [0] [0] 1
 gt [3] [0] [2]
-jt [3] 1838
+jt [3] 1838 # Line 813
 in [4]
 eq [3] [4] 10
-jt [3] 1838
+jt [3] 1838 # Line 816
 wmem [0] [4]
 add [5] [5] 1
-jmp 1809
+jmp 1809 # Line 819
 wmem [1] [5]
 eq [3] [4] 10
-jt [3] 1852
+jt [3] 1852 # Line 822
 in [4]
-jmp 1841
+jmp 1841 # Line 824
 pop [5]
 pop [4]
 pop [3]
@@ -839,7 +839,7 @@ wmem [5] [4]
 add [6] [6] 1
 rmem [5] 6147
 gt [4] [6] [5]
-jf [4] 1874
+jf [4] 1874 # Line 843
 set [3] 0
 set [4] 0
 rmem [5] 6147
@@ -853,7 +853,7 @@ wmem [5] [6]
 push [0]
 push [1]
 set [1] [6]
-call 2147
+call 2147 # Line 857
 set [6] [0]
 pop [1]
 pop [0]
@@ -861,7 +861,7 @@ rmem [5] [1]
 mod [6] [6] [5]
 add [6] [6] 1
 gt [5] [6] [2]
-jt [5] 1974
+jt [5] 1974 # Line 865
 set [3] 1
 add [6] [6] [1]
 rmem [6] [6]
@@ -870,11 +870,11 @@ add [5] [4] 6151
 wmem [5] [6]
 rmem [5] 6151
 eq [5] [4] [5]
-jf [5] 1908
-jf [3] 1902
+jf [5] 1908 # Line 874
+jf [3] 1902 # Line 875
 push [0]
 set [0] 6151
-call 1540
+call 1540 # Line 878
 pop [0]
 pop [6]
 pop [5]
@@ -889,18 +889,18 @@ push [4]
 push [5]
 set [2] 1
 set [5] 0
-jf [0] 2114
+jf [0] 2114 # Line 893
 eq [4] [2] 10000
 set [3] [0]
-jt [4] 2062
+jt [4] 2062 # Line 896
 mult [1] [2] 10
 mod [3] [0] [1]
 set [4] 0
 mult [2] [2] 32767
-jf [3] 2082
+jf [3] 2082 # Line 901
 add [4] [4] 1
 add [3] [3] [2]
-jmp 2069
+jmp 2069 # Line 904
 mult [2] [2] 32767
 mult [3] [4] [2]
 mult [3] [3] 32767
@@ -909,15 +909,15 @@ add [4] [4] 48
 mult [2] [2] 10
 add [5] [5] 1
 push [4]
-jmp 2041
-jt [5] 2121
+jmp 2041 # Line 913
+jt [5] 2121 # Line 914
 out 48
-jmp 2134
-jf [5] 2134
+jmp 2134 # Line 916
+jf [5] 2134 # Line 917
 pop [0]
 out [0]
 add [5] [5] 32767
-jmp 2121
+jmp 2121 # Line 921
 pop [5]
 pop [4]
 pop [3]
@@ -944,12 +944,12 @@ add [0] [0] [1]
 set [1] [2]
 pop [2]
 ret
-jf [0] 2263
-jf [1] 2263
+jf [0] 2263 # Line 948
+jf [1] 2263 # Line 949
 push [2]
 push [3]
 gt [2] [1] [0]
-jt [2] 2226
+jt [2] 2226 # Line 953
 set [2] [0]
 set [0] [1]
 set [1] [2]
@@ -957,11 +957,11 @@ set [2] [0]
 set [0] 0
 add [0] [0] [1]
 gt [3] [1] [0]
-jt [3] 2255
+jt [3] 2255 # Line 961
 add [2] [2] 32767
-jt [2] 2232
+jt [2] 2232 # Line 963
 set [1] 0
-jmp 2258
+jmp 2258 # Line 965
 set [1] 1
 pop [3]
 pop [2]
@@ -971,29 +971,29 @@ set [1] 0
 ret
 push [1]
 push [2]
-jf [1] 2298
+jf [1] 2298 # Line 975
 add [1] [1] 32767
 and [2] [0] 16384
 mult [0] [0] 2
-jf [2] 2274
+jf [2] 2274 # Line 979
 or [0] [0] 1
-jmp 2274
+jmp 2274 # Line 981
 pop [2]
 pop [1]
 ret
 push [1]
 gt [1] [0] 14
-jt [1] 2331
+jt [1] 2331 # Line 987
 set [1] [0]
 set [0] 1
-jf [1] 2334
+jf [1] 2334 # Line 990
 add [1] [1] 32767
 mult [0] [0] 2
-jmp 2318
+jmp 2318 # Line 993
 set [0] 32767
 pop [1]
 ret
-jmp 2756
+jmp 2756 # Line 997
 6164
 6174
 26914
@@ -1415,19 +1415,19 @@ push [3]
 rmem [1] 2754
 rmem [0] 2755
 eq [0] [0] [1]
-jt [0] 2792
+jt [0] 2792 # Line 1419
 rmem [0] 2754
 add [0] [0] 4
 rmem [0] [0]
-jf [0] 2792
+jf [0] 2792 # Line 1423
 call [0]
 rmem [1] 2754
 rmem [0] 2755
 eq [0] [0] [1]
-jt [0] 2813
+jt [0] 2813 # Line 1428
 set [0] 25988
 wmem [0] 0
-call 2986
+call 2986 # Line 1431
 wmem 2755 [1]
 push [0]
 push [1]
@@ -1435,20 +1435,20 @@ push [2]
 set [0] 27428
 set [1] 1553
 add [2] 3958 20602
-call 1480
+call 1480 # Line 1439
 pop [2]
 pop [1]
 pop [0]
 set [0] 32
 set [1] 25988
-call 1789
+call 1789 # Line 1445
 out 10
 out 10
 set [0] 25988
 set [1] 32
-call 1593
+call 1593 # Line 1450
 eq [1] [0] 32767
-jf [1] 2870
+jf [1] 2870 # Line 1452
 rmem [0] 25988
 set [2] [0]
 rmem [1] 25988
@@ -1456,11 +1456,11 @@ push [1]
 wmem 25988 [2]
 set [0] 27412
 set [1] 25988
-call 1610
+call 1610 # Line 1460
 pop [1]
 wmem 25988 [1]
 eq [1] [0] 32767
-jf [1] 2907
+jf [1] 2907 # Line 1464
 set [0] 0
 set [2] 0
 add [1] 27420 1
@@ -1468,22 +1468,22 @@ add [1] [1] [0]
 rmem [1] [1]
 rmem [3] 25988
 eq [3] [3] [2]
-jt [3] 2966
+jt [3] 2966 # Line 1472
 mult [0] [2] 32767
 rmem [3] 25988
 add [3] [0] [3]
-jf [2] 2946
+jf [2] 2946 # Line 1476
 add [3] [3] 32767
 mod [3] [3] 32
 add [0] 25988 [2]
-jf [2] 2961
+jf [2] 2961 # Line 1480
 add [0] [0] 1
 wmem [0] [3]
-jmp 2972
+jmp 2972 # Line 1483
 set [0] 25988
 wmem [0] 0
 call [1]
-jt [1] 2764
+jt [1] 2764 # Line 1487
 pop [3]
 pop [2]
 pop [1]
@@ -1493,30 +1493,30 @@ push [0]
 push [1]
 push [2]
 rmem [1] [0]
-jf [1] 3054
-call 5943
-jf [0] 3028
+jf [1] 3054 # Line 1497
+call 5943 # Line 1498
+jf [0] 3028 # Line 1499
 push [0]
-call 6012
+call 6012 # Line 1501
 set [1] [0]
 pop [0]
-jf [1] 3028
+jf [1] 3028 # Line 1504
 add [1] [0] 1
 rmem [0] [1]
-call 1540
+call 1540 # Line 1507
 out 10
-jmp 3260
+jmp 3260 # Line 1509
 push [0]
 push [1]
 push [2]
 set [0] 27446
 set [1] 1553
 add [2] 10341 18451
-call 1480
+call 1480 # Line 1516
 pop [2]
 pop [1]
 pop [0]
-jmp 3260
+jmp 3260 # Line 1520
 rmem [0] 2754
 push [0]
 out 61
@@ -1524,7 +1524,7 @@ out 61
 out 32
 add [0] [0] 0
 rmem [0] [0]
-call 1540
+call 1540 # Line 1528
 out 32
 out 61
 out 61
@@ -1535,33 +1535,33 @@ add [0] [0] 1
 rmem [0] [0]
 rmem [1] [0]
 eq [1] [1] 2
-jf [1] 3126
+jf [1] 3126 # Line 1539
 push [0]
 set [0] 2702
-call 6012
+call 6012 # Line 1542
 set [1] [0]
 pop [0]
 add [0] [0] 1
 add [0] [0] [1]
 rmem [0] [0]
-call 1540
+call 1540 # Line 1548
 out 10
 pop [0]
 push [0]
-call 5845
-jf [0] 3168
+call 5845 # Line 1552
+jf [0] 3168 # Line 1553
 push [0]
 push [1]
 push [2]
 set [0] 27469
 set [1] 1553
 add [2] 3231 7496
-call 1480
+call 1480 # Line 1560
 pop [2]
 pop [1]
 pop [0]
 rmem [2] 2754
-call 5898
+call 5898 # Line 1565
 pop [0]
 push [0]
 add [0] [0] 2
@@ -1575,22 +1575,22 @@ out 101
 out 114
 out 101
 out 32
-jt [2] 3211
+jt [2] 3211 # Line 1579
 out 97
 out 114
 out 101
-jmp 3215
+jmp 3215 # Line 1583
 out 105
 out 115
 out 32
-call 2023
+call 2023 # Line 1587
 out 32
 out 101
 out 120
 out 105
 out 116
 eq [2] [0] 1
-jt [2] 3238
+jt [2] 3238 # Line 1594
 out 115
 out 58
 out 10
@@ -1599,7 +1599,7 @@ push [0]
 add [0] [0] 2
 rmem [0] [0]
 set [1] 5836
-call 1480
+call 1480 # Line 1603
 pop [0]
 pop [2]
 pop [1]
@@ -1612,9 +1612,9 @@ set [1] [0]
 rmem [0] 2754
 add [0] [0] 2
 rmem [0] [0]
-call 1610
+call 1610 # Line 1616
 eq [2] [0] 32767
-jt [2] 3324
+jt [2] 3324 # Line 1618
 rmem [2] 2754
 add [2] [2] 3
 rmem [2] [2]
@@ -1623,14 +1623,14 @@ add [2] [2] [0]
 rmem [2] [2]
 wmem 2754 [2]
 wmem 2755 0
-jmp 3348
+jmp 3348 # Line 1627
 push [0]
 push [1]
 push [2]
 set [0] 27496
 set [1] 1553
 add [2] 11010 5751
-call 1480
+call 1480 # Line 1634
 pop [2]
 pop [1]
 pop [0]
@@ -1645,7 +1645,7 @@ push [2]
 set [0] 27546
 set [1] 1553
 add [2] 681 188
-call 1480
+call 1480 # Line 1649
 pop [2]
 pop [1]
 pop [0]
@@ -1659,25 +1659,25 @@ push [2]
 set [0] 28051
 set [1] 1553
 add [2] 28 1227
-call 1480
+call 1480 # Line 1663
 pop [2]
 pop [1]
 pop [0]
 set [2] 0
-call 5898
+call 5898 # Line 1668
 pop [2]
 pop [0]
 ret
 push [0]
 push [1]
 push [2]
-call 5943
-jf [0] 3479
+call 5943 # Line 1675
+jf [0] 3479 # Line 1676
 add [1] [0] 2
 rmem [0] [1]
 rmem [2] 2754
 eq [2] [0] [2]
-jf [2] 3479
+jf [2] 3479 # Line 1681
 wmem [1] 0
 push [0]
 push [1]
@@ -1685,18 +1685,18 @@ push [2]
 set [0] 28068
 set [1] 1553
 add [2] 380 996
-call 1480
+call 1480 # Line 1689
 pop [2]
 pop [1]
 pop [0]
-jmp 3503
+jmp 3503 # Line 1693
 push [0]
 push [1]
 push [2]
 set [0] 28076
 set [1] 1553
 add [2] 4508 20821
-call 1480
+call 1480 # Line 1700
 pop [2]
 pop [1]
 pop [0]
@@ -1706,11 +1706,11 @@ pop [0]
 ret
 push [0]
 push [1]
-call 5943
-jf [0] 3561
+call 5943 # Line 1710
+jf [0] 3561 # Line 1711
 add [1] [0] 2
 rmem [0] [1]
-jt [0] 3561
+jt [0] 3561 # Line 1714
 rmem [0] 2754
 wmem [1] [0]
 push [0]
@@ -1719,18 +1719,18 @@ push [2]
 set [0] 28104
 set [1] 1553
 add [2] 3129 2100
-call 1480
+call 1480 # Line 1723
 pop [2]
 pop [1]
 pop [0]
-jmp 3585
+jmp 3585 # Line 1727
 push [0]
 push [1]
 push [2]
 set [0] 28114
 set [1] 1553
 add [2] 6899 758
-call 1480
+call 1480 # Line 1734
 pop [2]
 pop [1]
 pop [0]
@@ -1739,34 +1739,34 @@ pop [0]
 ret
 push [0]
 push [1]
-call 5943
-jf [0] 3623
+call 5943 # Line 1743
+jf [0] 3623 # Line 1744
 add [1] [0] 2
 rmem [1] [1]
-jt [1] 3623
+jt [1] 3623 # Line 1747
 add [1] [0] 3
 rmem [1] [1]
-jf [1] 3649
+jf [1] 3649 # Line 1750
 call [1]
-jmp 3673
+jmp 3673 # Line 1752
 push [0]
 push [1]
 push [2]
 set [0] 28149
 set [1] 1553
 add [2] 526 83
-call 1480
+call 1480 # Line 1759
 pop [2]
 pop [1]
 pop [0]
-jmp 3673
+jmp 3673 # Line 1763
 push [0]
 push [1]
 push [2]
 set [0] 28184
 set [1] 1553
 add [2] 3367 5963
-call 1480
+call 1480 # Line 1770
 pop [2]
 pop [1]
 pop [0]
@@ -1777,8 +1777,8 @@ push [0]
 push [1]
 push [2]
 set [0] 2702
-call 6012
-jt [0] 3716
+call 6012 # Line 1781
+jt [0] 3716 # Line 1782
 add [0] 2698 2
 wmem [0] 32767
 add [0] 2702 2
@@ -1796,7 +1796,7 @@ push [2]
 set [0] 28218
 set [1] 1553
 add [2] 14633 15953
-call 1480
+call 1480 # Line 1800
 pop [2]
 pop [1]
 pop [0]
@@ -1812,32 +1812,32 @@ wmem 3748 0
 ret
 push [0]
 set [0] 1
-call 3749
+call 3749 # Line 1816
 pop [0]
 ret
 push [0]
 set [0] 2
-call 3749
+call 3749 # Line 1821
 pop [0]
 ret
 push [0]
 set [0] 4
-call 3749
+call 3749 # Line 1826
 pop [0]
 ret
 push [0]
 set [0] 8
-call 3749
+call 3749 # Line 1831
 pop [0]
 ret
 push [0]
 set [0] 16
-call 3749
+call 3749 # Line 1836
 pop [0]
 ret
 push [0]
 set [0] 32
-call 3749
+call 3749 # Line 1841
 pop [0]
 ret
 push [0]
@@ -1845,14 +1845,14 @@ push [1]
 push [2]
 push [3]
 set [0] 64
-call 3749
+call 3749 # Line 1849
 push [0]
 push [1]
 push [2]
 set [0] 28250
 set [1] 1553
 add [2] 7662 19058
-call 1480
+call 1480 # Line 1856
 pop [2]
 pop [1]
 pop [0]
@@ -1860,14 +1860,14 @@ rmem [0] 3748
 set [1] 25880
 set [2] 32767
 set [3] 28313
-call 1863
+call 1863 # Line 1864
 push [0]
 push [1]
 push [2]
 set [0] 28317
 set [1] 1553
 add [2] 12862 39
-call 1480
+call 1480 # Line 1871
 pop [2]
 pop [1]
 pop [0]
@@ -1882,14 +1882,14 @@ push [1]
 rmem [0] 2484
 rmem [1] 27115
 eq [0] [0] [1]
-jt [0] 3962
+jt [0] 3962 # Line 1886
 push [0]
 push [1]
 push [2]
 set [0] 28361
 set [1] 1553
 add [2] 2737 22709
-call 1480
+call 1480 # Line 1893
 pop [2]
 pop [1]
 pop [0]
@@ -1915,7 +1915,7 @@ push [0]
 push [1]
 set [0] 2
 set [1] 0
-call 4240
+call 4240 # Line 1919
 pop [1]
 pop [0]
 ret
@@ -1923,7 +1923,7 @@ push [0]
 push [1]
 set [0] 8
 set [1] 1
-call 4301
+call 4301 # Line 1927
 pop [1]
 pop [0]
 ret
@@ -1931,7 +1931,7 @@ push [0]
 push [1]
 set [0] 1
 set [1] 2
-call 4240
+call 4240 # Line 1935
 pop [1]
 pop [0]
 ret
@@ -1939,8 +1939,8 @@ push [0]
 push [1]
 set [0] 1
 set [1] 3
-call 4301
-call 4555
+call 4301 # Line 1943
+call 4555 # Line 1944
 pop [1]
 pop [0]
 ret
@@ -1948,7 +1948,7 @@ push [0]
 push [1]
 set [0] 4
 set [1] 4
-call 4301
+call 4301 # Line 1952
 pop [1]
 pop [0]
 ret
@@ -1956,7 +1956,7 @@ push [0]
 push [1]
 set [0] 2
 set [1] 5
-call 4240
+call 4240 # Line 1960
 pop [1]
 pop [0]
 ret
@@ -1964,7 +1964,7 @@ push [0]
 push [1]
 set [0] 11
 set [1] 6
-call 4301
+call 4301 # Line 1968
 pop [1]
 pop [0]
 ret
@@ -1972,7 +1972,7 @@ push [0]
 push [1]
 set [0] 2
 set [1] 7
-call 4240
+call 4240 # Line 1976
 pop [1]
 pop [0]
 ret
@@ -1980,7 +1980,7 @@ push [0]
 push [1]
 set [0] 0
 set [1] 8
-call 4240
+call 4240 # Line 1984
 pop [1]
 pop [0]
 ret
@@ -1988,7 +1988,7 @@ push [0]
 push [1]
 set [0] 4
 set [1] 9
-call 4301
+call 4301 # Line 1992
 pop [1]
 pop [0]
 ret
@@ -1996,7 +1996,7 @@ push [0]
 push [1]
 set [0] 1
 set [1] 10
-call 4240
+call 4240 # Line 2000
 pop [1]
 pop [0]
 ret
@@ -2004,17 +2004,17 @@ push [0]
 push [1]
 set [0] 18
 set [1] 11
-call 4301
+call 4301 # Line 2008
 pop [1]
 pop [0]
 ret
-call 4633
+call 4633 # Line 2012
 ret
 push [0]
 push [1]
 set [0] 1
 set [1] 12
-call 4240
+call 4240 # Line 2018
 pop [1]
 pop [0]
 ret
@@ -2022,7 +2022,7 @@ push [0]
 push [1]
 set [0] 9
 set [1] 13
-call 4301
+call 4301 # Line 2026
 pop [1]
 pop [0]
 ret
@@ -2030,7 +2030,7 @@ push [0]
 push [1]
 set [0] 2
 set [1] 14
-call 4240
+call 4240 # Line 2034
 pop [1]
 pop [0]
 ret
@@ -2039,19 +2039,19 @@ push [1]
 push [2]
 add [2] 2738 2
 rmem [2] [2]
-jt [2] 4294
-call 4427
+jt [2] 4294 # Line 2043
+call 4427 # Line 2044
 wmem 3973 [0]
 add [1] [0] 3967
 rmem [1] [1]
 set [0] 26038
-call 1540
+call 1540 # Line 2049
 set [0] [1]
-call 1540
+call 1540 # Line 2051
 set [0] 26102
-call 1540
+call 1540 # Line 2053
 set [0] [1]
-call 1540
+call 1540 # Line 2055
 out 46
 out 10
 out 10
@@ -2064,18 +2064,18 @@ push [1]
 push [2]
 add [2] 2738 2
 rmem [2] [2]
-jt [2] 4420
-call 4427
+jt [2] 4420 # Line 2068
+call 4427 # Line 2069
 push [0]
 rmem [0] 3973
 add [1] [0] 3967
 rmem [1] [1]
 set [0] 26136
-call 1540
+call 1540 # Line 2075
 set [0] [1]
-call 1540
+call 1540 # Line 2077
 set [0] 26184
-call 1540
+call 1540 # Line 2079
 pop [0]
 set [1] [0]
 rmem [0] 3974
@@ -2083,27 +2083,27 @@ rmem [2] 3973
 add [2] [2] 3970
 rmem [2] [2]
 call [2]
-jt [1] 4413
+jt [1] 4413 # Line 2087
 rmem [1] 3974
 wmem 3974 [0]
 gt [2] [0] [1]
-jf [2] 4391
+jf [2] 4391 # Line 2091
 push [0]
 set [0] 26249
-call 1540
+call 1540 # Line 2094
 pop [0]
 gt [2] [1] [0]
-jf [2] 4407
+jf [2] 4407 # Line 2097
 push [0]
 set [0] 26281
-call 1540
+call 1540 # Line 2100
 pop [0]
 out 10
 out 10
-jmp 4420
-call 4682
+jmp 4420 # Line 2104
+call 4682 # Line 2105
 set [0] 26313
-call 1540
+call 1540 # Line 2107
 pop [2]
 pop [1]
 pop [0]
@@ -2116,31 +2116,31 @@ push [4]
 push [5]
 rmem [5] 3975
 gt [3] [5] 29999
-jt [3] 4456
+jt [3] 4456 # Line 2120
 add [5] [5] 1
 wmem 3975 [5]
 set [3] [0]
 set [4] [1]
 add [0] [5] 2
-call 2303
+call 2303 # Line 2126
 rmem [1] 3976
 or [0] [1] [0]
 set [1] [4]
-call 2270
+call 2270 # Line 2130
 wmem 3976 [0]
 set [0] 3977
 add [1] [5] 2
 set [2] [4]
-call 4537
+call 4537 # Line 2135
 set [0] 3978
 mult [1] [5] [5]
 mult [2] [4] [4]
-call 4537
+call 4537 # Line 2139
 set [0] 3979
 set [1] 13
 mult [2] [3] 9
 mult [2] [2] [2]
-call 4537
+call 4537 # Line 2144
 pop [5]
 pop [4]
 pop [3]
@@ -2150,37 +2150,37 @@ pop [0]
 ret
 push [0]
 rmem [0] [0]
-call 2270
+call 2270 # Line 2154
 set [1] [2]
-call 2147
+call 2147 # Line 2156
 pop [1]
 wmem [1] [0]
 ret
 push [0]
 add [0] 2738 2
 rmem [0] [0]
-jt [0] 4630
+jt [0] 4630 # Line 2163
 set [0] 26335
-call 1540
+call 1540 # Line 2165
 rmem [0] 3974
 eq [0] [0] 30
-jt [0] 4596
+jt [0] 4596 # Line 2168
 set [0] 26368
-call 1540
+call 1540 # Line 2170
 set [0] 26412
-call 1540
-call 4682
-jmp 4630
+call 1540 # Line 2172
+call 4682 # Line 2173
+jmp 4630 # Line 2174
 set [0] 26454
-call 1540
+call 1540 # Line 2176
 rmem [0] 3976
 add [0] [0] 1
-jt [0] 4618
+jt [0] 4618 # Line 2179
 set [0] 26498
-call 1540
-jmp 4587
+call 1540 # Line 2181
+jmp 4587 # Line 2182
 set [0] 26598
-call 1540
+call 1540 # Line 2184
 add [0] 2738 2
 wmem [0] 32767
 pop [0]
@@ -2188,20 +2188,20 @@ ret
 push [0]
 add [0] 2738 2
 rmem [0] [0]
-jt [0] 4679
+jt [0] 4679 # Line 2192
 set [0] 26731
-call 1540
+call 1540 # Line 2194
 rmem [0] 2754
 eq [0] [0] 2645
-jt [0] 4667
+jt [0] 4667 # Line 2197
 set [0] 26739
-call 1540
-jmp 4672
+call 1540 # Line 2199
+jmp 4672 # Line 2200
 set [0] 26745
-call 1540
+call 1540 # Line 2202
 set [0] 26751
-call 1540
-call 4682
+call 1540 # Line 2204
+call 4682 # Line 2205
 pop [0]
 ret
 push [0]
@@ -2219,9 +2219,9 @@ push [0]
 add [0] 2738 2
 rmem [0] [0]
 eq [0] [0] 32767
-jt [0] 4739
+jt [0] 4739 # Line 2223
 set [0] 26838
-call 1540
+call 1540 # Line 2225
 wmem 2754 2600
 wmem 2755 2600
 pop [0]
@@ -2236,7 +2236,7 @@ push [2]
 set [0] 28383
 set [1] 1553
 add [2] 4072 25103
-call 1480
+call 1480 # Line 2240
 pop [2]
 pop [1]
 pop [0]
@@ -2244,14 +2244,14 @@ set [0] 4242
 set [1] 25880
 set [2] 32767
 set [3] 28411
-call 1863
+call 1863 # Line 2248
 push [0]
 push [1]
 push [2]
 set [0] 28415
 set [1] 1553
 add [2] 9840 9847
-call 1480
+call 1480 # Line 2255
 pop [2]
 pop [1]
 pop [0]
@@ -2263,7 +2263,7 @@ ret
 push [0]
 add [0] 2694 2
 rmem [0] [0]
-jt [0] 4880
+jt [0] 4880 # Line 2267
 add [0] 2706 2
 wmem [0] 32767
 add [0] 2694 2
@@ -2276,18 +2276,18 @@ push [2]
 set [0] 28467
 set [1] 1553
 add [2] 28391 3091
-call 1480
+call 1480 # Line 2280
 pop [2]
 pop [1]
 pop [0]
-jmp 4904
+jmp 4904 # Line 2284
 push [0]
 push [1]
 push [2]
 set [0] 28524
 set [1] 1553
 add [2] 5367 25601
-call 1480
+call 1480 # Line 2291
 pop [2]
 pop [1]
 pop [0]
@@ -2304,7 +2304,7 @@ push [2]
 set [0] 28583
 set [1] 1553
 add [2] 18336 7637
-call 1480
+call 1480 # Line 2308
 pop [2]
 pop [1]
 pop [0]
@@ -2322,7 +2322,7 @@ push [2]
 set [0] 28609
 set [1] 1553
 add [2] 16973 1834
-call 1480
+call 1480 # Line 2326
 pop [2]
 pop [1]
 pop [0]
@@ -2333,18 +2333,18 @@ push [2]
 push [3]
 rmem [2] 2754
 eq [2] [2] 2479
-jt [2] 5039
+jt [2] 5039 # Line 2337
 push [0]
 push [1]
 push [2]
 set [0] 28635
 set [1] 1553
 add [2] 4963 14461
-call 1480
+call 1480 # Line 2344
 pop [2]
 pop [1]
 pop [0]
-jmp 5358
+jmp 5358 # Line 2348
 add [2] [0] 2
 wmem [2] 32767
 rmem [2] 2484
@@ -2367,7 +2367,7 @@ push [2]
 set [0] 28678
 set [1] 1553
 add [2] 14248 6463
-call 1480
+call 1480 # Line 2371
 pop [2]
 pop [1]
 pop [0]
@@ -2375,7 +2375,7 @@ pop [0]
 push [0]
 add [2] [0] 0
 rmem [0] [2]
-call 1540
+call 1540 # Line 2379
 pop [0]
 push [0]
 push [0]
@@ -2384,7 +2384,7 @@ push [2]
 set [0] 28693
 set [1] 1553
 add [2] 348 154
-call 1480
+call 1480 # Line 2388
 pop [2]
 pop [1]
 pop [0]
@@ -2394,7 +2394,7 @@ add [2] [2] 1
 wmem 2484 [2]
 rmem [3] 27115
 eq [3] [2] [3]
-jf [3] 5358
+jf [3] 5358 # Line 2398
 set [0] 0
 add [1] 27115 1
 rmem [1] [1]
@@ -2416,7 +2416,7 @@ rmem [1] [1]
 mult [1] [1] 32767
 add [0] [0] [1]
 eq [1] [0] 399
-jt [1] 5334
+jt [1] 5334 # Line 2420
 add [2] 2710 2
 wmem [2] 2479
 add [2] 2714 2
@@ -2430,25 +2430,25 @@ wmem [2] 2479
 wmem 2484 0
 set [0] 27109
 set [1] 5363
-call 1480
+call 1480 # Line 2434
 push [0]
 push [1]
 push [2]
 set [0] 28724
 set [1] 1553
 add [2] 29348 1605
-call 1480
+call 1480 # Line 2441
 pop [2]
 pop [1]
 pop [0]
-jmp 5358
+jmp 5358 # Line 2445
 push [0]
 push [1]
 push [2]
 set [0] 28791
 set [1] 1553
 add [2] 72 162
-call 1480
+call 1480 # Line 2452
 pop [2]
 pop [1]
 pop [0]
@@ -2466,7 +2466,7 @@ push [0]
 push [1]
 set [0] 2710
 set [1] 2
-call 4999
+call 4999 # Line 2470
 pop [1]
 pop [0]
 ret
@@ -2474,7 +2474,7 @@ push [0]
 push [1]
 set [0] 2714
 set [1] 3
-call 4999
+call 4999 # Line 2478
 pop [1]
 pop [0]
 ret
@@ -2482,7 +2482,7 @@ push [0]
 push [1]
 set [0] 2718
 set [1] 5
-call 4999
+call 4999 # Line 2486
 pop [1]
 pop [0]
 ret
@@ -2490,7 +2490,7 @@ push [0]
 push [1]
 set [0] 2722
 set [1] 7
-call 4999
+call 4999 # Line 2494
 pop [1]
 pop [0]
 ret
@@ -2498,21 +2498,21 @@ push [0]
 push [1]
 set [0] 2726
 set [1] 9
-call 4999
+call 4999 # Line 2502
 pop [1]
 pop [0]
 ret
 push [0]
 push [1]
 push [2]
-jf [7] 5627
+jf [7] 5627 # Line 2509
 push [0]
 push [1]
 push [2]
 set [0] 28858
 set [1] 1553
 add [2] 16357 3
-call 1480
+call 1480 # Line 2516
 pop [2]
 pop [1]
 pop [0]
@@ -2523,16 +2523,16 @@ noop
 noop
 set [0] 4
 set [1] 1
-call 6049
+call 6049 # Line 2527
 eq [1] [0] 6
-jf [1] 5601
+jf [1] 5601 # Line 2529
 push [0]
 push [1]
 push [2]
 set [0] 29027
 set [1] 1553
 add [2] 8051 14968
-call 1480
+call 1480 # Line 2536
 pop [2]
 pop [1]
 pop [0]
@@ -2541,7 +2541,7 @@ set [1] 25880
 set [2] 32767
 push [3]
 set [3] 29254
-call 1863
+call 1863 # Line 2545
 pop [3]
 push [0]
 push [1]
@@ -2549,7 +2549,7 @@ push [2]
 set [0] 29258
 set [1] 1553
 add [2] 202 29735
-call 1480
+call 1480 # Line 2553
 pop [2]
 pop [1]
 pop [0]
@@ -2557,25 +2557,25 @@ wmem 2754 2520
 wmem 2755 0
 add [1] 2730 2
 wmem [1] 32767
-jmp 5736
+jmp 5736 # Line 2561
 push [0]
 push [1]
 push [2]
 set [0] 29307
 set [1] 1553
 add [2] 426 12103
-call 1480
+call 1480 # Line 2568
 pop [2]
 pop [1]
 pop [0]
-jmp 5736
+jmp 5736 # Line 2572
 push [0]
 push [1]
 push [2]
 set [0] 29452
 set [1] 1553
 add [2] 3485 2907
-call 1480
+call 1480 # Line 2579
 pop [2]
 pop [1]
 pop [0]
@@ -2584,17 +2584,17 @@ add [2] 1 27115
 rmem [1] [2]
 add [0] [0] [1]
 mult [0] [0] 31660
-call 2147
+call 2147 # Line 2588
 rmem [1] 27115
 add [1] [1] 27115
 add [2] [2] 1
 gt [1] [2] [1]
-jf [1] 5658
+jf [1] 5658 # Line 2593
 set [1] 25880
 set [2] 32767
 push [3]
 set [3] 29570
-call 1863
+call 1863 # Line 2598
 pop [3]
 push [0]
 push [1]
@@ -2602,13 +2602,13 @@ push [2]
 set [0] 29574
 set [1] 1553
 add [2] 74 2852
-call 1480
+call 1480 # Line 2606
 pop [2]
 pop [1]
 pop [0]
 wmem 2754 2510
 wmem 2755 0
-jmp 5736
+jmp 5736 # Line 2612
 pop [2]
 pop [1]
 pop [0]
@@ -2623,20 +2623,20 @@ push [2]
 set [0] 29664
 set [1] 1553
 add [2] 11087 546
-call 1480
+call 1480 # Line 2627
 pop [2]
 pop [1]
 pop [0]
 rmem [0] 3977
 rmem [1] 3978
-call 2147
+call 2147 # Line 2633
 rmem [1] 3979
-call 2147
+call 2147 # Line 2635
 set [1] 25933
 set [2] 4
 push [3]
 set [3] 29849
-call 1863
+call 1863 # Line 2640
 pop [3]
 push [0]
 push [1]
@@ -2644,7 +2644,7 @@ push [2]
 set [0] 29853
 set [1] 1553
 add [2] 601 2078
-call 1480
+call 1480 # Line 2648
 pop [2]
 pop [1]
 pop [0]
@@ -2655,7 +2655,7 @@ pop [0]
 ret
 out 45
 out 32
-call 1540
+call 1540 # Line 2659
 out 10
 ret
 push [1]
@@ -2663,7 +2663,7 @@ push [2]
 set [0] 27395
 set [1] 5868
 set [2] 0
-call 1480
+call 1480 # Line 2667
 set [0] [2]
 pop [2]
 pop [1]
@@ -2674,7 +2674,7 @@ rmem [3] 2754
 add [4] [0] 2
 rmem [4] [4]
 eq [3] [3] [4]
-jf [3] 5893
+jf [3] 5893 # Line 2678
 add [2] [2] 1
 pop [4]
 pop [3]
@@ -2683,7 +2683,7 @@ push [0]
 push [1]
 set [0] 27395
 set [1] 5915
-call 1480
+call 1480 # Line 2687
 pop [1]
 pop [0]
 ret
@@ -2691,10 +2691,10 @@ push [3]
 add [3] [0] 2
 rmem [3] [3]
 eq [3] [2] [3]
-jf [3] 5940
+jf [3] 5940 # Line 2695
 add [0] [0] 0
 rmem [0] [0]
-call 5836
+call 5836 # Line 2698
 pop [3]
 ret
 push [1]
@@ -2702,13 +2702,13 @@ push [2]
 set [2] [0]
 set [0] 27395
 set [1] 5986
-call 1565
+call 1565 # Line 2706
 eq [1] [0] 32767
-jt [1] 5978
+jt [1] 5978 # Line 2708
 add [1] 27395 [0]
 add [1] [1] 1
 rmem [0] [1]
-jmp 5981
+jmp 5981 # Line 2712
 set [0] 0
 pop [2]
 pop [1]
@@ -2717,9 +2717,9 @@ push [1]
 set [1] [2]
 add [0] [0] 0
 rmem [0] [0]
-call 1689
+call 1689 # Line 2721
 pop [1]
-jf [0] 6011
+jf [0] 6011 # Line 2723
 set [2] [1]
 set [1] 32767
 ret
@@ -2727,31 +2727,31 @@ push [1]
 push [2]
 add [0] [0] 2
 rmem [0] [0]
-jf [0] 6041
+jf [0] 6041 # Line 2731
 rmem [1] 2754
 eq [1] [0] [1]
-jt [1] 6041
+jt [1] 6041 # Line 2734
 set [0] 0
-jmp 6044
+jmp 6044 # Line 2736
 set [0] 1
 pop [2]
 pop [1]
 ret
-jt [0] 6057
+jt [0] 6057 # Line 2741
 add [0] [1] 1
 ret
-jt [1] 6070
+jt [1] 6070 # Line 2744
 add [0] [0] 32767
 set [1] [7]
-call 6049
+call 6049 # Line 2747
 ret
 push [0]
 add [1] [1] 32767
-call 6049
+call 6049 # Line 2751
 set [1] [0]
 pop [0]
 add [0] [0] 32767
-call 6049
+call 6049 # Line 2755
 ret
 mod 84 101 115
 116
@@ -3008,7 +3008,7 @@ add 70 111 111
 110
 33
 34
-jt 100 111
+jt 100 111 # Line 3012
 111
 114
 119
@@ -3549,7 +3549,7 @@ add 68 97 114
 115
 115
 46
-jmp 98
+jmp 98 # Line 3553
 114
 105
 100
@@ -3689,7 +3689,7 @@ mod 82 111 112
 104
 116
 46
-jf 99 111
+jf 99 111 # Line 3693
 110
 116
 105
@@ -4395,13 +4395,13 @@ mod 77 111 115
 46
 eq 101 97 115
 116
-jt 112 97
+jt 112 97 # Line 4399
 115
 115
 97
 103
 101
-jt 80 97
+jt 80 97 # Line 4405
 115
 115
 97
@@ -4584,26 +4584,26 @@ jt 80 97
 111
 119
 46
-jmp 99
+jmp 99 # Line 4588
 97
 118
 101
 114
 110
-jmp 108
+jmp 108 # Line 4594
 97
 100
 100
 101
 114
-jf 100 97
+jf 100 97 # Line 4600
 114
 107
 110
 101
 115
 115
-jt 80 97
+jt 80 97 # Line 4607
 115
 115
 97
@@ -4743,7 +4743,7 @@ jt 80 97
 97
 121
 46
-jf 99 111
+jf 99 111 # Line 4747
 110
 116
 105
@@ -4890,7 +4890,7 @@ rmem 84 119
 117
 112
 46
-jmp 108
+jmp 108 # Line 4894
 97
 100
 100
@@ -7917,7 +7917,7 @@ in 83
 103
 104
 46
-jt 111 117
+jt 111 117 # Line 7921
 116
 115
 105
@@ -8089,7 +8089,7 @@ in 83
 115
 116
 46
-jmp 105
+jmp 105 # Line 8093
 110
 115
 105
@@ -12852,7 +12852,7 @@ gt 115 111 117
 104
 eq 119 101 115
 116
-call 86
+call 86 # Line 12856
 97
 117
 108
@@ -13796,7 +13796,7 @@ gt 108 101 97
 115
 115
 46
-jt 102 111
+jt 102 111 # Line 13800
 114
 119
 97
@@ -13943,7 +13943,7 @@ mod 105 110 118
 97
 116
 101
-call 80
+call 80 # Line 13947
 97
 110
 105
@@ -14045,7 +14045,7 @@ gt 101 97 116
 101
 110
 halt
-jmp 116
+jmp 116 # Line 14049
 97
 98
 108
@@ -14323,7 +14323,7 @@ or 101 109 112
 105
 108
 46
-jt 108 97
+jt 108 97 # Line 14327
 110
 116
 101
@@ -14591,7 +14591,7 @@ pop 99
 105
 108
 46
-jf 114 101
+jf 114 101 # Line 14595
 100
 32
 99
@@ -15210,7 +15210,7 @@ pop 111
 108
 108
 46
-jmp 109
+jmp 109 # Line 15214
 105
 114
 114
@@ -17928,7 +17928,7 @@ mult 10 79 102
 117
 115
 46
-jt 106 111
+jt 106 111 # Line 17932
 117
 114
 110
@@ -21792,7 +21792,7 @@ gt 103 114 101
 pop 114
 101
 100
-jmp 121
+jmp 121 # Line 21796
 101
 108
 108
@@ -22777,7 +22777,7 @@ gt 267 271 275
 281
 287
 gt 9 2 5
-jt 3 1
+jt 3 1 # Line 22781
 10621
 set 2479 2
 10772
@@ -22971,19 +22971,19 @@ wmem 2690 2694
 2750
 2738
 2742
-jt 25957 25960
+jt 25957 25960 # Line 22975
 25965
 25970
 25974
 25979
 25984
-jt 3267 2986
+jt 3267 2986 # Line 22981
 3355
 3384
 3422
 3510
 3590
-call 24570
+call 24570 # Line 22987
 24487
 24472
 24465
@@ -23620,7 +23620,7 @@ wmem 1214 1160
 1182
 1245
 1261
-jt 1332 1281
+jt 1332 1281 # Line 23624
 1291
 1285
 1294
