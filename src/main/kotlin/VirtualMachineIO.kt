@@ -61,7 +61,7 @@ object VirtualMachineIO {
             } else {
                 lineBuilder.append(value)
                 if (isJump && i == opcode.numArgs - 1) {
-                    lineBuilder.append(" # Line ").append(getLineNumber(data, offset + 1))
+                    lineBuilder.append(" # Line ").append(getLineNumber(data, value.toInt()))
                 }
             }
         }
@@ -131,17 +131,9 @@ object VirtualMachineIO {
         var idx = 0
 
         while (idx < offset) {
-            val opcodeId = data[idx]
-            val opcode = getOpcode(opcodeId)
-            if (opcode == null) {
-                idx++
-                line++
-                continue
-            } else {
-                idx += 1 + opcode.numArgs
-                line++
-                continue
-            }
+            val opcode = getOpcode(data[idx])
+            idx += if (opcode == null) 1 else 1 + opcode.numArgs
+            line++
         }
 
         return line
