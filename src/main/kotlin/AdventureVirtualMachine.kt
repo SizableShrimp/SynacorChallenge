@@ -39,11 +39,6 @@ class AdventureVirtualMachine : VirtualMachine {
         return action.toString()
     }
 
-    private fun pauseDebugger() {
-        // Place a debug point on the line below
-        val b = false
-    }
-
     internal fun updateCurrentRoom() {
         // The first 9 lines of the program are always the same; skip them
         var idx = if (this.lines[0] == "Welcome to the Synacor OSCON 2012 Challenge!") 9 else 0

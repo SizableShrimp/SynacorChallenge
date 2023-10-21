@@ -132,7 +132,7 @@ class AdventurePathFinder(private val data: ByteArray) {
             "west",
             // Go back to ladder and go up it
             "ladder",
-            // Go through darkness with light lantern
+            // Go through darkness with lit lantern
             "darkness",
             "continue",
             "west",

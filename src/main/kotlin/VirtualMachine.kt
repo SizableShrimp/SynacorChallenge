@@ -7,6 +7,12 @@ abstract class VirtualMachine(internal val data: UShortArray) {
     internal var offset: Int = 0
     internal val registers: UShortArray = UShortArray(8)
     internal val stack: Deque<UShort> = LinkedList()
+
+    /**
+     * Holds the stack of the current operation calls.
+     * The values in this stack are a mapping from current offset -> new offset.
+     */
+    internal val callStack: Deque<Pair<UShort, UShort>> = LinkedList()
     private val inQueue: Deque<Char> = LinkedList()
     var paused: Boolean = false
 
@@ -40,6 +46,11 @@ abstract class VirtualMachine(internal val data: UShortArray) {
         }
 
         return false
+    }
+
+    protected fun pauseDebugger() {
+        // Place a debug point on the line below
+        val b = false
     }
 
     internal fun set(idx: Int, value: UShort, relative: Boolean = true) {
@@ -109,11 +120,16 @@ abstract class VirtualMachine(internal val data: UShortArray) {
         NOT(14, 2, { set(0, get(1).inv().toUInt().shl(17).shr(17).toUShort()) }),
         RMEM(15, 2, { set(0, get(get(1).toInt(), relative = false)) }),
         WMEM(16, 2, { set(get(0).toInt(), get(1), relative = false) }),
-        CALL(17, 1, { stack.add((offset + 2).toUShort()) }) {
+        CALL(17, 1, {
+            callStack.add(offset.toUShort() to get(0))
+            stack.add((offset + 2).toUShort())
+        }) {
             override fun getOffset(vm: VirtualMachine) = vm.get(0).toInt()
         },
         RET(18, 0) {
             override fun getOffset(vm: VirtualMachine): Int {
+                if (vm.callStack.isNotEmpty())
+                    vm.callStack.removeLast()
                 return if (vm.stack.isEmpty()) -1 else vm.stack.removeLast().toInt()
             }
         },

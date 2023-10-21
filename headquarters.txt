@@ -673,6 +673,21 @@
 673: out 112 # 'p'
 674: out 10 # '\n'
 675: halt
+
+# Function consumeString(UShort address = reg[0], Consumer<Char> consumer = reg[1])
+#
+# This function iterates through the characters in a string.
+# In memory, a string is stored with the length in the lowest address,
+# then the contents of the string with each character in the next address.
+# Arguments in: reg[0], reg[1]
+# - reg[0]: The memory address for the string
+# - reg[1]: Function pointer for character consumer
+# - data[reg[0]]: Length of the string
+# - data[reg[0] + 1]: First character of the string
+# - data[reg[0] + 2]: Second character of the string, etc.
+#
+# This function will iterate through each char in the string and call the function pointer
+# with each character.
 676: push [0]
 677: push [3]
 678: push [4]
@@ -680,68 +695,88 @@
 680: push [6]
 681: set [6] [0]
 682: set [5] [1]
-683: rmem [4] [0]
-684: set [1] 0
-685: add [3] 1 [1]
+683: rmem [4] [0] # reg[4] = data[reg[0]], this is the target length
+684: set [1] 0 # Set written length (reg[1]) to 0
+
+# Loop
+685: add [3] 1 [1] # reg[3] = reg[1] + 1
 686: gt [0] [3] [4]
-687: jt [0] 1529 # 693
-688: add [3] [3] [6]
-689: rmem [0] [3]
-690: call [5]
-691: add [1] [1] 1
+687: jt [0] 1529 # 693 - Exit loop if reg[3] > reg[4]
+688: add [3] [3] [6] # reg[3] += reg[6]
+# Store the character in reg[0] based on the data at memory address in reg[3]
+689: rmem [0] [3] # reg[0] = data[reg[3]]
+690: call [5] # This calls the char consumer
+691: add [1] [1] 1 # reg[1]++
 692: jt [1] 1502 # 685
+
 693: pop [6]
 694: pop [5]
 695: pop [4]
 696: pop [3]
 697: pop [0]
 698: ret
+
+# Function printString(UShort length = reg[0])
+#
+# This function prints a string to the console.
 699: push [1]
-700: set [1] 1550
+700: set [1] 1550 # 704
 701: call 1480 # 676
 702: pop [1]
 703: ret
+
 704: out [0]
 705: ret
+
 706: push [1]
 707: set [1] [2]
 708: call 2147 # 928
 709: out [0]
 710: pop [1]
 711: ret
+
 712: push [1]
 713: push [3]
 714: rmem [3] [0]
 715: jf [3] 1585 # 720
+
 716: call 1480 # 676
 717: jt [1] 1585 # 720
+
 718: set [0] [2]
 719: jmp 1588 # 721
 720: set [0] 32767
 721: pop [3]
 722: pop [1]
 723: ret
+
 724: push [1]
 725: push [2]
 726: set [2] [1]
 727: set [1] 1627
 728: call 1565 # 712
+
 729: pop [2]
 730: pop [1]
 731: ret
+
 732: push [1]
 733: push [2]
 734: set [2] [1]
 735: set [1] 1670
 736: call 1565 # 712
+
 737: pop [2]
 738: pop [1]
 739: ret
+
 740: eq [0] [0] [2]
 741: jf [0] 1640 # 744
+
 742: set [2] [1]
 743: set [1] 32767
 744: ret
+
 745: push [3]
 746: add [3] [2] 1
 747: add [3] [3] [1]
@@ -827,6 +862,8 @@
 827: pop [2]
 828: pop [0]
 829: ret
+
+# Function Y - something to do with printing
 830: push [3]
 831: push [4]
 832: push [5]
@@ -858,8 +895,8 @@
 858: pop [1]
 859: pop [0]
 860: rmem [5] [1]
-861: mod [6] [6] [5]
-862: add [6] [6] 1
+861: mod [6] [6] [5] // reg[6] %= reg[5]
+862: add [6] [6] 1 // reg[6]++
 863: gt [5] [6] [2]
 864: jt [5] 1974 # 866
 865: set [3] 1
@@ -867,20 +904,21 @@
 867: rmem [6] [6]
 868: add [4] [4] 1
 869: add [5] [4] 6151
-870: wmem [5] [6]
-871: rmem [5] 6151
+870: wmem [5] [6] # data[reg[5]] = reg[6]
+871: rmem [5] 6151 # reg[5] = data[6151]
 872: eq [5] [4] [5]
 873: jf [5] 1908 # 845
 874: jf [3] 1902 # 843
 875: push [0]
-876: set [0] 6151
-877: call 1540 # 699
+876: set [0] 6151 # data[6151] is the start of the string
+877: call 1540 # 699 - Call printString()
 878: pop [0]
 879: pop [6]
 880: pop [5]
 881: pop [4]
 882: pop [3]
 883: ret
+
 884: push [0]
 885: push [1]
 886: push [2]
@@ -2545,15 +2583,22 @@
 2523: noop
 2524: set [0] 4
 2525: set [1] 1
-2526: call 6049 # 2740
-2527: eq [1] [0] 6
-2528: jf [1] 5601 # 2561
+
+# Calls into the innermost teleporter loop
+# 2526: call 6049 # 2740
+2526: set [1] 1
+# 2527: eq [1] [0] 6 # Set reg 1 to 1 if reg 0 == 6
+2527: set [0] 6
+2528: jf [1] 5601 # 2561 - Jumps to line 2561 if reg 0 != 6
+
+# Only called if reg 0 == 6
 2529: push [0]
 2530: push [1]
 2531: push [2]
 2532: set [0] 29027
 2533: set [1] 1553
 2534: add [2] 8051 14968
+# Call into function A -- it will call func at op 1553 for us
 2535: call 1480 # 676
 2536: pop [2]
 2537: pop [1]
@@ -2571,6 +2616,7 @@
 2549: set [0] 29258
 2550: set [1] 1553
 2551: add [2] 202 29735
+# Call into function A -- it will call func at op 1553 for us
 2552: call 1480 # 676
 2553: pop [2]
 2554: pop [1]
@@ -2580,17 +2626,22 @@
 2558: add [1] 2730 2
 2559: wmem [1] 32767
 2560: jmp 5736 # 2612
+
+# Called by teleporter code if reg 0 != 6
 2561: push [0]
 2562: push [1]
 2563: push [2]
 2564: set [0] 29307
 2565: set [1] 1553
 2566: add [2] 426 12103
+# Call into function A -- it will call func at op 1553 for us
 2567: call 1480 # 676
 2568: pop [2]
 2569: pop [1]
 2570: pop [0]
 2571: jmp 5736 # 2612
+
+# This code is executed if teleporter reg is set to default 0
 2572: push [0]
 2573: push [1]
 2574: push [2]
@@ -2764,9 +2815,17 @@
 
 # Innermost teleporter loop
 2740: jt [0] 6057 # 2743
+# Attempt 1 at modifying teleport code -- messes up code #7
+# 2740: add [0] [7] 1
+# 2741: ret
 
 # Only ran if reg 0 == 0
 2741: add [0] [1] 1
+# Attempt 1 at modifying teleport code -- messes up code #7
+# # We need an extra arg for our modified 2740,
+# # so we skip two args here
+# 32769
+# 2741: noop
 2742: ret
 
 # Runs if reg 0 != 0
@@ -2780,7 +2839,12 @@
 
 # Runs if reg 1 != 0
 2748: push [0]
+# Attempt 2 at modifying teleport code -- still messes up code #7
+# 2748: add [0] [7] 1
 2749: add [1] [1] 32767 # Subtract 1 from reg 1
+# Attempt 2 at modifying teleport code -- still messes up code #7
+# 2749: ret
+# 2749: noop
 2750: call 6049 # 2740
 
 # Called after one recursive exit of innermost loop
