@@ -674,6 +674,8 @@
 674: out 10 # '\n'
 675: halt
 
+
+
 # Function consumeString(UShort address = reg[0], Consumer<Char> consumer = reg[1])
 #
 # This function iterates through the characters in a string.
@@ -716,6 +718,8 @@
 697: pop [0]
 698: ret
 
+
+
 # Function printString(UShort address = reg[0])
 #
 # This function prints a string to the console.
@@ -725,58 +729,66 @@
 702: pop [1]
 703: ret
 
+
+
+# Function printChar(UShort char = reg[0])
+#
+# Prints the char in reg[0] to the console.
 704: out [0]
 705: ret
 
+
+
+# Function decryptCharAndPrint(UShort encryptedChar = reg[0], UShort decryptionKey = reg[2])
+#
+# This function is a char consumer for consumeString().
+# reg[0] is the encrypted char provided from consumeString() for each char in the string.
+# reg[2] is the decryption key.
+# This function decrypts each char by calling Function X with the encrypted char as the first
+# parameter, and the decryption key as the second.
+# The decrypted char is then printed to the console.
 706: push [1]
 707: set [1] [2]
-708: call 2147 # 928
+708: call 2147 # 928 - Calls Function X
 709: out [0]
 710: pop [1]
 711: ret
+
+
 
 712: push [1]
 713: push [3]
 714: rmem [3] [0]
 715: jf [3] 1585 # 720
-
 716: call 1480 # 676
 717: jt [1] 1585 # 720
-
 718: set [0] [2]
 719: jmp 1588 # 721
 720: set [0] 32767
 721: pop [3]
 722: pop [1]
 723: ret
-
 724: push [1]
 725: push [2]
 726: set [2] [1]
 727: set [1] 1627
 728: call 1565 # 712
-
 729: pop [2]
 730: pop [1]
 731: ret
-
 732: push [1]
 733: push [2]
 734: set [2] [1]
 735: set [1] 1670
 736: call 1565 # 712
-
 737: pop [2]
 738: pop [1]
 739: ret
-
 740: eq [0] [0] [2]
 741: jf [0] 1640 # 744
-
 742: set [2] [1]
 743: set [1] 32767
 744: ret
-
 745: push [3]
 746: add [3] [2] 1
 747: add [3] [3] [1]
@@ -1829,6 +1841,10 @@
 1737: pop [1]
 1738: pop [0]
 1739: ret
+
+
+
+# Function T - I'm guessing this is used for generic handling of item logic
 1740: push [0]
 1741: push [1]
 1742: call 5943 # 2700
@@ -1865,6 +1881,9 @@
 1773: pop [1]
 1774: pop [0]
 1775: ret
+
+
+
 1776: push [0]
 1777: push [1]
 1778: push [2]
@@ -1948,11 +1967,14 @@
 1856: pop [2]
 1857: pop [1]
 1858: pop [0]
-1859: rmem [0] 3748
-1860: set [1] 25880
-1861: set [2] 32767
-1862: set [3] 28313
+
+# Call into decodeSynacorCode()
+1859: rmem [0] 3748 # binaryModifier = data[3748]
+1860: set [1] 25880 # Pointer to the alphabet string
+1861: set [2] 32767 # exitComparison
+1862: set [3] 28313 # copyAddr
 1863: call 1863 # 830
+
 1864: push [0]
 1865: push [1]
 1866: push [2]
@@ -2742,31 +2764,38 @@
 
 
 
+# Function U - called from line 1750
 2616: push [0]
 2617: push [1]
 2618: push [2]
 2619: push [3]
+
+# Call consumeString()
 2620: push [0]
 2621: push [1]
 2622: push [2]
-2623: set [0] 29664
-2624: set [1] 1553
-2625: add [2] 11087 546
+2623: set [0] 29664 # Pointer to start of string
+2624: set [1] 1553 # Function pointer for char consumer decryptCharAndPrint()
+2625: add [2] 11087 546 # Decryption key for decryptCharAndPrint()
 2626: call 1480 # 676
 2627: pop [2]
 2628: pop [1]
 2629: pop [0]
+
 2630: rmem [0] 3977
 2631: rmem [1] 3978
 2632: call 2147 # 928
 2633: rmem [1] 3979
 2634: call 2147 # 928
-2635: set [1] 25933
-2636: set [2] 4
+
+# Call decodeSynacorCode()
+2635: set [1] 25933 # moduloAddr
+2636: set [2] 4 # exitComparison
 2637: push [3]
-2638: set [3] 29849
+2638: set [3] 29849 # copyAddr
 2639: call 1863 # 830
 2640: pop [3]
+
 2641: push [0]
 2642: push [1]
 2643: push [2]
@@ -2782,6 +2811,9 @@
 2653: pop [1]
 2654: pop [0]
 2655: ret
+
+
+
 2656: out 45 # '-'
 2657: out 32 # ' '
 2658: call 1540 # 699

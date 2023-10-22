@@ -8,6 +8,7 @@ fun main() {
     )
     allPermutations(intToCoinMap.keys).forEach {
         val (a, b, c, d, e) = it
+        // _ + _ * _^2 + _^3 - e = 399
         if (a + b * c * c + d * d * d - e == 399) {
             it.map(intToCoinMap::get).map { s -> "use $s coin" }.forEach(::println)
             return

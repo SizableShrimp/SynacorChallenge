@@ -172,7 +172,36 @@ class AdventurePathFinder(private val data: ByteArray) {
             "use teleporter"
         )
         internal val headquartersStartingActions: List<String> = listOf(
-            "use teleporter"
+            "use teleporter",
+            "north",
+            "north",
+            "north",
+            "north",
+            "north",
+            "north",
+            "north",
+            "east",
+            "take journal",
+            "west",
+            "north",
+            "north", // Entrance to Vault Antechamber
+            "take orb",
+            // Taken from VaultSolver.kt
+            "north",
+            "east",
+            "east",
+            "north",
+            "west",
+            "south",
+            "east",
+            "east",
+            "west",
+            "north",
+            "north",
+            "east", // Vault is unlocked now
+            "vault",
+            "take mirror",
+            "use mirror"
         )
     }
 
