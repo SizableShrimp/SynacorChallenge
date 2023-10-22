@@ -19,5 +19,6 @@ $ echo -n "<Code Here>" | md5sum
   - Solved by walking around the twisty passages aimlessly
 - [x] e09640936b3ef532b7b8e83ce8f125f4
   - Solved by exploring the text-based adventure game and going to the ruins and solving the monument puzzle and getting the teleporter
-- [ ] 4873cf6b76f62ac7d5a53605b2535a0c
+- [x] 4873cf6b76f62ac7d5a53605b2535a0c
+  - Solved by reverse-engineering decodeSynacorCode() and simulating it in Kotlin to find the right code that gives the correct MD5 hash (basically cheated)
 - [ ] d0c54d4ed7f943280ce3e19532dbb1a6

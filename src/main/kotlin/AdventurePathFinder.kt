@@ -1,3 +1,7 @@
+@file:OptIn(ExperimentalUnsignedTypes::class)
+
+import java.nio.file.Paths
+
 fun AdventureVirtualMachine.toNode(): AdventurePathFinder.Node {
     return AdventurePathFinder.Node(this.actionHistory.size, this.inv.toSet(), this.currentRoom!!)
 }
@@ -6,7 +10,7 @@ class AdventurePathFinder(private val data: ByteArray) {
     private val visited = mutableMapOf<Node, Int>()
     private val vms = mutableListOf<AdventureVirtualMachine>()
 
-    private fun getStartingActions(): List<AdventureVirtualMachine.Action> = startingActions.map {
+    private fun getStartingActions(): List<AdventureVirtualMachine.Action> = headquartersStartingActions.map {
         AdventureVirtualMachine.Action(
             AdventureVirtualMachine.ActionType.BY_NAME[it.substringBefore(' ')]
                 ?: AdventureVirtualMachine.ActionType.GO,
@@ -16,6 +20,8 @@ class AdventurePathFinder(private val data: ByteArray) {
 
     fun run() {
         val startingVm = AdventureVirtualMachine(this.data)
+        VirtualMachineIO.readVM(startingVm, Paths.get("headquarters.txt"))
+        startingVm.registers[7] = 25_734U
         val startingActions = this.getStartingActions().toMutableList()
         var start = false
         while (startingActions.isNotEmpty()) {
@@ -163,6 +169,9 @@ class AdventurePathFinder(private val data: ByteArray) {
             // Go through unlocked Foyer door
             "north",
             "take teleporter",
+            "use teleporter"
+        )
+        internal val headquartersStartingActions: List<String> = listOf(
             "use teleporter"
         )
     }

@@ -405,7 +405,7 @@
 405: rmem [2] [0]
 406: eq [1] [2] 30000
 407: jf [1] 1284 # 575
-408: call 1745 # 785
+408: call 1745 # 785 - Function V
 409: rmem [0] 6090
 410: eq [1] [0] 11
 411: jf [1] 1261 # 563
@@ -716,7 +716,7 @@
 697: pop [0]
 698: ret
 
-# Function printString(UShort length = reg[0])
+# Function printString(UShort address = reg[0])
 #
 # This function prints a string to the console.
 699: push [1]
@@ -817,15 +817,18 @@
 782: pop [2]
 783: pop [1]
 784: ret
+
+
+# Function V
 785: push [0]
 786: push [1]
 787: set [1] 6090
 788: rmem [0] [1]
 789: push [1]
 790: mult [1] [1] [1]
-791: call 2147 # 928
+791: call 2147 # 928 - Function X
 792: set [1] 16724
-793: call 2147 # 928
+793: call 2147 # 928 - Function X
 794: pop [1]
 795: wmem [1] [0]
 796: add [1] [1] 1
@@ -834,6 +837,9 @@
 799: pop [1]
 800: pop [0]
 801: ret
+
+
+
 802: push [0]
 803: push [2]
 804: push [3]
@@ -863,61 +869,87 @@
 828: pop [0]
 829: ret
 
-# Function Y - something to do with printing
+
+
+# Function decodeSynacorCode(UShort binaryModifier = reg[0], UShort moduloAddr = reg[1],
+#                            UShort exitComparison = reg[2], UShort copyAddr = reg[3])
+#
+# This function copies 3 shorts stored at [copyAddr + 1, copyAddr + 2, copyAddr + 3]
+# to [6148, 6149, 6150]. These 3 shorts are then used with a mathematical formula combining
+# binaryModifier, moduloAddr, and exitComparison to get an index at an offset from moduloAddr.
+# Finally, the shorts are copied at an offset from moduloAddr and stored in memory addresses 6152..6163
+# and then passed to printString() for printing to the console.
+#
+# Arguments in: reg[0], reg[1], reg[2], reg[3]
 830: push [3]
 831: push [4]
 832: push [5]
 833: push [6]
 834: set [6] 1
+
+# Loop - copy 3 shorts at addr reg[3]+1 to addr 6148
 835: add [4] [3] [6]
-836: rmem [4] [4]
+836: rmem [4] [4] # reg[4] = data[reg[4]]
 837: add [5] 6147 [6]
 838: wmem [5] [4]
 839: add [6] [6] 1
 840: rmem [5] 6147
-841: gt [4] [6] [5]
-842: jf [4] 1874 # 835
-843: set [3] 0
-844: set [4] 0
-845: rmem [5] 6147
-846: mod [5] [4] [5]
-847: add [5] [5] 6147
-848: add [5] [5] 1
-849: rmem [6] [5]
-850: mult [6] [6] 5249
-851: add [6] [6] 12345
-852: wmem [5] [6]
-853: push [0]
-854: push [1]
-855: set [1] [6]
-856: call 2147 # 928
-857: set [6] [0]
-858: pop [1]
-859: pop [0]
-860: rmem [5] [1]
-861: mod [6] [6] [5] // reg[6] %= reg[5]
-862: add [6] [6] 1 // reg[6]++
-863: gt [5] [6] [2]
-864: jt [5] 1974 # 866
-865: set [3] 1
-866: add [6] [6] [1]
-867: rmem [6] [6]
-868: add [4] [4] 1
-869: add [5] [4] 6151
-870: wmem [5] [6] # data[reg[5]] = reg[6]
-871: rmem [5] 6151 # reg[5] = data[6151]
-872: eq [5] [4] [5]
-873: jf [5] 1908 # 845
-874: jf [3] 1902 # 843
+841: gt [4] [6] [5] # reg[4] = reg[6] > reg[5] ? 1 : 0
+842: jf [4] 1874 # 835 - Jump if reg[6] <= reg[5]
+
+  # Loop A
+  843: set [3] 0
+  844: set [4] 0
+
+    # Loop B
+    845: rmem [5] 6147
+    846: mod [5] [4] [5]
+    847: add [5] [5] 6147
+    848: add [5] [5] 1
+    849: rmem [6] [5]
+    850: mult [6] [6] 5249
+    851: add [6] [6] 12345
+    852: wmem [5] [6]
+
+    # Function call to Function X
+    853: push [0]
+    854: push [1]
+    855: set [1] [6]
+    856: call 2147 # 928
+    857: set [6] [0]
+    858: pop [1]
+    859: pop [0]
+
+    860: rmem [5] [1] # reg[5] = data[reg[1]]
+    861: mod [6] [6] [5] # reg[6] %= reg[5]
+    862: add [6] [6] 1 # reg[6]++
+    863: gt [5] [6] [2] # reg[5] = reg[6] > reg[2] ? 1 : 0
+    864: jt [5] 1974 # 866 - Jumps if reg[6] > reg[2]
+    865: set [3] 1 # reg[3] = 1 - Only runs if reg[6] <= reg[2]
+    866: add [6] [6] [1] # reg[6] += reg[1]
+    867: rmem [6] [6] # reg[6] = data[reg[6]]
+    868: add [4] [4] 1 # reg[4]++
+    869: add [5] [4] 6151 # reg[5] = reg[4] + 6151
+    870: wmem [5] [6] # data[reg[5]] = reg[6]
+    871: rmem [5] 6151 # reg[5] = data[6151] - Set reg[5] to the length of the string
+    872: eq [5] [4] [5] # reg[5] = reg[4] == reg[5] ? 1 : 0
+    873: jf [5] 1908 # 845 - Repeat Loop B if reg[4] != reg[5]
+
+  874: jf [3] 1902 # 843 - Repeat Loop A
+
+# Function call: printString(6151)
 875: push [0]
 876: set [0] 6151 # data[6151] is the start of the string
 877: call 1540 # 699 - Call printString()
 878: pop [0]
+
 879: pop [6]
 880: pop [5]
 881: pop [4]
 882: pop [3]
 883: ret
+
+
 
 884: push [0]
 885: push [1]
@@ -963,6 +995,11 @@
 925: pop [1]
 926: pop [0]
 927: ret
+
+# Function X
+#
+# Arguments in: reg[0], reg[1]
+# Result out: reg[0]
 928: push [1]
 929: push [2]
 930: and [2] [0] [1]
@@ -972,6 +1009,7 @@
 934: pop [2]
 935: pop [1]
 936: ret
+
 937: add [0] [0] [1]
 938: gt [1] [1] [0]
 939: ret
@@ -2556,26 +2594,29 @@
 2502: pop [1]
 2503: pop [0]
 2504: ret
+
+
+
+# Function teleport()
 2505: push [0]
 2506: push [1]
 2507: push [2]
-2508: jf [7] 5627 # 2572
+2508: jf [7] 5627 # 2572 - Jump to 2572 if we didn't modify teleport val
 
 # Ran if we modified the teleport val
-# Store regs 0, 1, 2 for retrieval later
+# Call into function A -- it will call func at op 1553 for us
 2509: push [0]
 2510: push [1]
 2511: push [2]
-
-# Prepare regs 0 and 1 for use by function A
 2512: set [0] 28858
 2513: set [1] 1553
 2514: add [2] 16357 3
-# Call into function A -- it will call func at op 1553 for us
 2515: call 1480 # 676
 2516: pop [2]
 2517: pop [1]
 2518: pop [0]
+
+# Calls into the innermost teleporter loop
 2519: noop
 2520: noop
 2521: noop
@@ -2583,65 +2624,70 @@
 2523: noop
 2524: set [0] 4
 2525: set [1] 1
-
-# Calls into the innermost teleporter loop
+# MODIFIED CODE
 # 2526: call 6049 # 2740
-2526: set [1] 1
+2526: noop
+2526: noop
 # 2527: eq [1] [0] 6 # Set reg 1 to 1 if reg 0 == 6
 2527: set [0] 6
+2527: noop
 2528: jf [1] 5601 # 2561 - Jumps to line 2561 if reg 0 != 6
 
-# Only called if reg 0 == 6
-2529: push [0]
-2530: push [1]
-2531: push [2]
-2532: set [0] 29027
-2533: set [1] 1553
-2534: add [2] 8051 14968
-# Call into function A -- it will call func at op 1553 for us
-2535: call 1480 # 676
-2536: pop [2]
-2537: pop [1]
-2538: pop [0]
-2539: set [0] [7]
-2540: set [1] 25880
-2541: set [2] 32767
-2542: push [3]
-2543: set [3] 29254
-2544: call 1863 # 830
-2545: pop [3]
-2546: push [0]
-2547: push [1]
-2548: push [2]
-2549: set [0] 29258
-2550: set [1] 1553
-2551: add [2] 202 29735
-# Call into function A -- it will call func at op 1553 for us
-2552: call 1480 # 676
-2553: pop [2]
-2554: pop [1]
-2555: pop [0]
-2556: wmem 2754 2520
-2557: wmem 2755 0
-2558: add [1] 2730 2
-2559: wmem [1] 32767
-2560: jmp 5736 # 2612
+# if (reg 0 == 6) {
+  # Call into function A -- it will call func at op 1553 for us
+  2529: push [0]
+  2530: push [1]
+  2531: push [2]
+  2532: set [0] 29027
+  2533: set [1] 1553
+  2534: add [2] 8051 14968
+  2535: call 1480 # 676
+  2536: pop [2]
+  2537: pop [1]
+  2538: pop [0]
 
-# Called by teleporter code if reg 0 != 6
-2561: push [0]
-2562: push [1]
-2563: push [2]
-2564: set [0] 29307
-2565: set [1] 1553
-2566: add [2] 426 12103
-# Call into function A -- it will call func at op 1553 for us
-2567: call 1480 # 676
-2568: pop [2]
-2569: pop [1]
-2570: pop [0]
-2571: jmp 5736 # 2612
+  # Call into decodeSynacorCode()
+  2539: set [0] [7] # binaryModifier
+  2540: set [1] 25880 # Pointer to the alphabet string
+  2541: set [2] 32767 # exitComparison
+  2542: push [3]
+  2543: set [3] 29254 # copyAddr
+  2544: call 1863 # 830
+  2545: pop [3]
 
-# This code is executed if teleporter reg is set to default 0
+  # Call into function A -- it will call func at op 1553 for us
+  2546: push [0]
+  2547: push [1]
+  2548: push [2]
+  2549: set [0] 29258
+  2550: set [1] 1553
+  2551: add [2] 202 29735
+  2552: call 1480 # 676
+  2553: pop [2]
+  2554: pop [1]
+  2555: pop [0]
+
+  2556: wmem 2754 2520
+  2557: wmem 2755 0
+  2558: add [1] 2730 2
+  2559: wmem [1] 32767
+  2560: jmp 5736 # 2612 - Skip to function exit
+# } else { // Here, reg 0 does not equal 6
+  # Call into function A -- it will call func at op 1553 for us
+  2561: push [0]
+  2562: push [1]
+  2563: push [2]
+  2564: set [0] 29307
+  2565: set [1] 1553
+  2566: add [2] 426 12103
+  2567: call 1480 # 676
+  2568: pop [2]
+  2569: pop [1]
+  2570: pop [0]
+  2571: jmp 5736 # 2612 - Skip to function exit
+# }
+
+# This code is executed if teleporter val is set to the default, 0
 2572: push [0]
 2573: push [1]
 2574: push [2]
@@ -2654,21 +2700,26 @@
 2581: pop [0]
 2582: set [0] 0
 2583: add [2] 1 27115
+
+# Loop
 2584: rmem [1] [2]
 2585: add [0] [0] [1]
 2586: mult [0] [0] 31660
-2587: call 2147 # 928
+2587: call 2147 # 928 - Call into Function X
 2588: rmem [1] 27115
 2589: add [1] [1] 27115
 2590: add [2] [2] 1
 2591: gt [1] [2] [1]
 2592: jf [1] 5658 # 2584
-2593: set [1] 25880
-2594: set [2] 32767
+
+# Call into decodeSynacorCode()
+2593: set [1] 25880 # Pointer to the alphabet string
+2594: set [2] 32767 # exitComparison
 2595: push [3]
-2596: set [3] 29570
+2596: set [3] 29570 # copyAddr
 2597: call 1863 # 830
 2598: pop [3]
+
 2599: push [0]
 2600: push [1]
 2601: push [2]
@@ -2682,10 +2733,15 @@
 2609: wmem 2754 2510
 2610: wmem 2755 0
 2611: jmp 5736 # 2612
+
+# Called after both branches of modified or unmodified teleporter
 2612: pop [2]
 2613: pop [1]
 2614: pop [0]
 2615: ret
+
+
+
 2616: push [0]
 2617: push [1]
 2618: push [2]
@@ -21766,6 +21822,12 @@
 99
 107
 33
+
+# THE ALPHABET - The following 53 shorts are a string with the alphabet
+# a-z and then A-Z in ASCII character codes, for use by other functions.
+# This is stored as a standard string, where the first memory address is used for the length,
+# and then the next (length) memory addresses have characters for the string.
+# The alphabet string is stored at memory address 25880, with characters starting at 25881.
 52
 97
 98

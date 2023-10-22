@@ -80,43 +80,10 @@ object VirtualMachineIO {
     }
 
     fun readVM(vm: VirtualMachine, path: Path) {
-        val lines = Files.readAllLines(path).map {
-            val commentIdx = it.indexOf('#')
-            if (commentIdx != -1) {
-                it.substring(0, commentIdx)
-            } else {
-                it
-            }
-        }.filter { it.isNotBlank() }.map { it.trim() }
-        var idx = 0
-        var breakIdx = 0
+        val lines = readVMLines(path)
 
         // Pseudocode
-        for ((lineIdx, line) in lines.withIndex()) {
-            if (line[0].isUpperCase()) {
-                breakIdx = lineIdx
-                break
-            }
-
-            val colonIdx = line.indexOf(':')
-            if (colonIdx == -1) {
-                vm.data[idx++] = line.toUShort()
-                continue
-            }
-
-            val split = line.substring(colonIdx + 2).split(' ')
-            val opcode = VirtualMachine.Opcode.valueOf(split[0].uppercase())
-            vm.data[idx++] = opcode.id.toUShort()
-
-            for (i in 0..<opcode.numArgs) {
-                val valueStr = split[i + 1]
-                vm.data[idx++] = if (valueStr[0] == '[') {
-                    (valueStr[1].digitToInt().toUInt() + 32768U).toUShort()
-                } else {
-                    valueStr.toUShort()
-                }
-            }
-        }
+        val breakIdx = readCode(lines, vm.data)
 
         // Offset
         vm.offset = lines[breakIdx].substring(8).toInt()
@@ -128,10 +95,48 @@ object VirtualMachineIO {
 
         // Stack
         for (i in (breakIdx + 2 + 8 + 1)..<lines.size) {
-            val line = lines[i]
-            if (line.isNotBlank())
-                vm.stack.addLast(line.toUShort())
+            vm.stack.addLast(lines[i].toUShort())
         }
+    }
+
+    private fun readVMLines(path: Path) = Files.readAllLines(path).map {
+        val commentIdx = it.indexOf('#')
+        if (commentIdx != -1) {
+            it.substring(0, commentIdx)
+        } else {
+            it
+        }
+    }.filter { it.isNotBlank() }.map { it.trim() }
+
+    private fun readCode(lines: List<String>, data: UShortArray): Int {
+        var idx = 0
+
+        for ((lineIdx, line) in lines.withIndex()) {
+            if (line[0].isUpperCase()) {
+                return lineIdx
+            }
+
+            val colonIdx = line.indexOf(':')
+            if (colonIdx == -1) {
+                data[idx++] = line.toUShort()
+                continue
+            }
+
+            val split = line.substring(colonIdx + 2).split(' ')
+            val opcode = VirtualMachine.Opcode.valueOf(split[0].uppercase())
+            data[idx++] = opcode.id.toUShort()
+
+            for (i in 0..<opcode.numArgs) {
+                val valueStr = split[i + 1]
+                data[idx++] = if (valueStr[0] == '[') {
+                    (valueStr[1].digitToInt().toUInt() + 32768U).toUShort()
+                } else {
+                    valueStr.toUShort()
+                }
+            }
+        }
+
+        error("Should not get here")
     }
 
     /**
