@@ -3,9 +3,7 @@ import java.util.LinkedList
 import java.util.stream.Collectors
 
 @OptIn(ExperimentalUnsignedTypes::class)
-class AdventureVirtualMachine : VirtualMachine {
-    private val lineBuilder: StringBuilder = StringBuilder()
-    internal val lines: MutableList<String> = mutableListOf()
+class AdventureVirtualMachine : OutputStoringVirtualMachine {
     private val mutableInv: MutableSet<String> = mutableSetOf()
     private val mutableActionHistory: MutableList<Action> = mutableListOf()
     val inv: Set<String> = this.mutableInv
@@ -17,16 +15,6 @@ class AdventureVirtualMachine : VirtualMachine {
     constructor(data: UShortArray) : super(data.copyOf())
 
     constructor(data: ByteArray) : super(data)
-
-    override fun printChar(char: Char) {
-        if (char == '\n') {
-            this.lines.add(this.lineBuilder.toString())
-            this.lineBuilder.clear()
-            return
-        }
-
-        this.lineBuilder.append(char)
-    }
 
     override fun readLine(): String? {
         if (this.actionQueue.isEmpty())
@@ -41,14 +29,14 @@ class AdventureVirtualMachine : VirtualMachine {
 
     internal fun updateCurrentRoom() {
         // The first 9 lines of the program are always the same; skip them
-        var idx = if (this.lines[0] == "Welcome to the Synacor OSCON 2012 Challenge!") 9 else 0
+        var idx = if (this.outputLines[0] == "Welcome to the Synacor OSCON 2012 Challenge!" || this.outputLines[0] == "Welcome to the Synacor Challenge!") 9 else 0
 
-        while (this.lines[idx].isBlank())
+        while (this.outputLines[idx].isBlank())
             idx++
 
-        val equalsIdx = this.lines.withIndex().firstOrNull { it.index >= idx && it.value.startsWith("==") }?.index ?: -1
+        val equalsIdx = this.outputLines.withIndex().firstOrNull { it.index >= idx && it.value.startsWith("==") }?.index ?: -1
         if (equalsIdx == -1) {
-            val firstLine = this.lines[idx]
+            val firstLine = this.outputLines[idx]
             val currentRoom = this.currentRoom!!
             val lastAction = this.mutableActionHistory[this.mutableActionHistory.lastIndex]
             when (lastAction.type) {
@@ -62,17 +50,17 @@ class AdventureVirtualMachine : VirtualMachine {
                     }
                 }
                 ActionType.USE -> {
-                    logInterestingThing(idx, this.lines.size - 3)
+                    logInterestingThing(idx, this.outputLines.size - 3)
                     this.actionQueue.add(Action(ActionType.INV))
-                    this.lines.clear()
+                    this.clearOutputLines()
                     this.run()
                     var invIdx = 0
-                    while (this.lines[invIdx].isBlank())
+                    while (this.outputLines[invIdx].isBlank())
                         invIdx++
                     invIdx++ // Skip "Your inventory:" line
                     this.mutableInv.clear()
-                    for (i in invIdx..<this.lines.size) {
-                        val line = this.lines[i]
+                    for (i in invIdx..<this.outputLines.size) {
+                        val line = this.outputLines[i]
                         if (line.startsWith("- "))
                             this.mutableInv.add(line.substring(2))
                     }
@@ -97,24 +85,24 @@ class AdventureVirtualMachine : VirtualMachine {
             idx = equalsIdx
         }
 
-        val roomName = this.lines[idx++].run { this.substring(3, this.length - 3) }
+        val roomName = this.outputLines[idx++].run { this.substring(3, this.length - 3) }
         val description = mutableListOf<String>()
         var toAdd: List<String>
         do {
-            toAdd = this.readUntilBlank(idx, this.lines)
+            toAdd = this.readUntilBlank(idx, this.outputLines)
             idx += toAdd.size + 1
             description.addAll(toAdd)
 
-            val currentLine = this.lines[idx]
+            val currentLine = this.outputLines[idx]
             if (currentLine == "Things of interest here:" || currentLine.endsWith(" exits:") || currentLine.endsWith(" exit:"))
                 break
-        } while (idx < this.lines.size)
+        } while (idx < this.outputLines.size)
 
-        var things = this.readUntilBlank(idx, this.lines)
+        var things = this.readUntilBlank(idx, this.outputLines)
         idx += things.size + 1
 
         val exits = if (things[0] == "Things of interest here:") {
-            this.readUntilBlank(idx, this.lines)
+            this.readUntilBlank(idx, this.outputLines)
         } else {
             val temp = things
             things = listOf()
@@ -129,7 +117,7 @@ class AdventureVirtualMachine : VirtualMachine {
 
     private fun logInterestingThing(startIdx: Int, endIdx: Int) {
         // Something interesting happened, log it if we haven't already
-        val interestingList = this.lines.subList(startIdx, endIdx).joinToString("\n")
+        val interestingList = this.outputLines.subList(startIdx, endIdx).joinToString("\n")
         if (interestingThings.add(interestingList))
             println(interestingList)
     }

@@ -11,15 +11,18 @@ object VirtualMachineIO {
         val data = vm.data
         val size = data.size
         while (idx < size) {
+            val lineBuilder = StringBuilder().append(lines.size + 1).append(": ")
             val opcode = getOpcode(data[idx])
+
             if (opcode == null) {
-                lines.add(data[idx].toString())
+                lineBuilder.append(data[idx])
                 idx++
-                continue
+            } else {
+                writeOpcode(opcode, data, idx, lineBuilder)
+                idx += 1 + opcode.numArgs
             }
 
-            lines.add((lines.size + 1).toString() + ": " + writeOpcode(opcode, data, idx))
-            idx += 1 + opcode.numArgs
+            lines.add(lineBuilder.toString())
         }
 
         lines.add("")
@@ -46,8 +49,8 @@ object VirtualMachineIO {
         Files.write(path, lines, Charsets.UTF_8)
     }
 
-    private fun writeOpcode(opcode: VirtualMachine.Opcode, data: UShortArray, offset: Int): String {
-        val lineBuilder = StringBuilder(opcode.name.lowercase())
+    private fun writeOpcode(opcode: VirtualMachine.Opcode, data: UShortArray, offset: Int, lineBuilder: StringBuilder) {
+        lineBuilder.append(opcode.name.lowercase())
         val isJump = opcode == VirtualMachine.Opcode.JMP
                 || opcode == VirtualMachine.Opcode.JT
                 || opcode == VirtualMachine.Opcode.JF
@@ -75,8 +78,6 @@ object VirtualMachineIO {
                 }
             }
         }
-
-        return lineBuilder.toString()
     }
 
     fun readVM(vm: VirtualMachine, path: Path) {
@@ -123,7 +124,12 @@ object VirtualMachineIO {
             }
 
             val split = line.substring(colonIdx + 2).split(' ')
-            val opcode = VirtualMachine.Opcode.valueOf(split[0].uppercase())
+            val opcodeStr = split[0]
+            if (split.size == 1 && opcodeStr[0].isDigit()) {
+                data[idx++] = opcodeStr.toUShort()
+                continue
+            }
+            val opcode = VirtualMachine.Opcode.valueOf(opcodeStr.uppercase())
             data[idx++] = opcode.id.toUShort()
 
             for (i in 0..<opcode.numArgs) {
@@ -155,8 +161,10 @@ object VirtualMachineIO {
         return line
     }
 
+    fun VirtualMachine.getLineNumber(offset: Int) = getLineNumber(this.data, offset)
+
     val VirtualMachine.lineNumber
-        get() = getLineNumber(this.data, this.offset)
+        get() = getLineNumber(this.offset)
 
     private fun getOpcode(opcodeId: UShort) = if (opcodeId > 256U) null else VirtualMachine.Opcode.LOOKUP_TABLE[opcodeId.toByte()]
 }

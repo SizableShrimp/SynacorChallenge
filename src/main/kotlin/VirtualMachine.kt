@@ -1,4 +1,3 @@
-import VirtualMachineIO.lineNumber
 import java.util.Deque
 import java.util.LinkedList
 import java.util.stream.Collectors
@@ -39,8 +38,6 @@ abstract class VirtualMachine(internal val data: UShortArray) {
             if (opcode == Opcode.HALT)
                 return true
 
-            if (this.lineNumber == 2620)
-                pauseDebugger()
             this.offset = opcode.execute(this)
             if (this.paused)
                 break

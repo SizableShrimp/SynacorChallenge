@@ -30,7 +30,7 @@ class AdventurePathFinder(private val data: ByteArray) {
             } else {
                 startingVm.actionQueue.add(startingActions.removeFirst())
             }
-            startingVm.lines.clear()
+            startingVm.clearOutputLines()
             startingVm.run()
             startingVm.updateCurrentRoom()
         }
@@ -106,7 +106,7 @@ class AdventurePathFinder(private val data: ByteArray) {
             vm.inv.forEach { actions.add(AdventureVirtualMachine.Action(AdventureVirtualMachine.ActionType.USE, it)) }
         }
 
-        vm.lines.clear()
+        vm.clearOutputLines()
 
         return actions
     }
@@ -114,6 +114,7 @@ class AdventurePathFinder(private val data: ByteArray) {
     companion object {
         internal val startingActions: List<String> = listOf(
             "take tablet",
+            "use tablet", // Print out the tablet code
             "doorway",
             "north",
             "north",
@@ -125,13 +126,11 @@ class AdventurePathFinder(private val data: ByteArray) {
             "west",
             "west",
             "passage",
-            // Grue time
-            // "darkness", // We need the lantern for this one
             "ladder",
             // To get to the can
             "west",
             "south",
-            "north",
+            "north", // After this, a code is scratched onto the wall
             "take can",
             "use can", // Fill the lantern with oil
             "use lantern", // Light the lantern
@@ -160,7 +159,7 @@ class AdventurePathFinder(private val data: ByteArray) {
             "take corroded coin",
             "up",
             "west",
-            // Put in coins in Monument in Ruins Central Hall
+            // Taken from MonumentSolver.kt - Put in coins in Monument in Ruins Central Hall
             "use blue coin",
             "use red coin",
             "use shiny coin",
@@ -169,10 +168,10 @@ class AdventurePathFinder(private val data: ByteArray) {
             // Go through unlocked Foyer door
             "north",
             "take teleporter",
-            "use teleporter"
+            "use teleporter" // A code is displayed in the stars while teleporting
         )
         internal val headquartersStartingActions: List<String> = listOf(
-            "use teleporter",
+            "use teleporter", // Another code is displayed in the stars while teleporting
             "north",
             "north",
             "north",
@@ -201,7 +200,7 @@ class AdventurePathFinder(private val data: ByteArray) {
             "east", // Vault is unlocked now
             "vault",
             "take mirror",
-            "use mirror"
+            "use mirror" // A code is displayed using the mirror
         )
     }
 
